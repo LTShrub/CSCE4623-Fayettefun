@@ -1,7 +1,8 @@
-package com.example.fayettefun
+package com.example.fayettefun.MainActivity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.fayettefun.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
