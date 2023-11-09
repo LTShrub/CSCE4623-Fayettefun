@@ -1,5 +1,6 @@
 package com.example.fayettefun.MapActivity
 
+import android.location.Location
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
@@ -27,7 +28,10 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
     private lateinit var mMap: MapView
     private lateinit var mLocationOverlay: MyLocationNewOverlay
     private lateinit var mCompassOverlay: CompassOverlay
+
+    // Location variables
     private var curLocation = GeoPoint(34.74, -92.28)
+    private lateinit var mCurrentLocation: Location // Current location(latitude, longitude)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -98,7 +102,7 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
             mMap.tileProvider.tileSource.copyrightNotice
         val copyrightOverlay = CopyrightOverlay(context)
         copyrightOverlay.setCopyrightNotice(copyrightNotice)
-        mMap.getOverlays().add(copyrightOverlay)
+        mMap.overlays.add(copyrightOverlay)
 
     }
 
@@ -117,53 +121,17 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
 
     }
 
-    fun addMarker(geoPoint: GeoPoint, id: Int) {
-        val startMarker = Marker(mMap)
-        startMarker.position = geoPoint
-        startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-        startMarker.setOnMarkerClickListener(this)
-        startMarker.id = id.toString()
-
-
-        startMarker.icon = ResourcesCompat.getDrawable(resources, R.drawable.map_pin_small, null)
-        mMap.getOverlays().add(startMarker)
-
-    }
-
-    fun clearMarkers() {
-        mMap.overlays.clear()
-        setupMapOptions()
-    }
-
-    fun clearOneMarker(id: Int) {
-        for (overlay in mMap.overlays) {
-            if (overlay is Marker) {
-                if (overlay.id == id.toString()) {
-                    mMap.overlays.remove(overlay)
-                }
-            }
-        }
-    }
-
-    override fun onMarkerClick(marker: Marker?, mapView: MapView?): Boolean {
-        marker?.id?.let { Log.d("OpenStreetMapFragment", it) }
-
-        return true
-    }
-
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-
-         * @return A new instance of fragment OpenStreetMapFragment.
-         */
         @JvmStatic
         fun newInstance() =
             OpenStreetMapFragment().apply {
                 arguments = Bundle().apply {
                 }
             }
+    }
+
+    override fun onMarkerClick(marker: Marker?, mapView: MapView?): Boolean {
+        TODO("Not yet implemented")
     }
 
 }
