@@ -43,9 +43,10 @@ class MapView : AppCompatActivity() {
 
         //Get access to mapsFragment object
         mapsFragment = supportFragmentManager.findFragmentById(R.id.map_fragment_container)
-                as OpenStreetMapFragment? ?:OpenStreetMapFragment.newInstance().also{
-            replaceFragmentInActivity(it,R.id.map_fragment_container)
+                as OpenStreetMapFragment? ?: OpenStreetMapFragment.newInstance().also {
+            replaceFragmentInActivity(it, R.id.map_fragment_container)
         }
+
 
     }
 
