@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import com.example.fayettefun.R
+import org.osmdroid.api.IMapController
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.CustomZoomButtonsController
@@ -26,12 +27,13 @@ import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
 
     private lateinit var mMap: MapView
+    private lateinit var mapController: IMapController
     private lateinit var mLocationOverlay: MyLocationNewOverlay
     private lateinit var mCompassOverlay: CompassOverlay
 
     // Location variables
-    private var curLocation = GeoPoint(34.74, -92.28)
     private lateinit var mCurrentLocation: Location // Current location(latitude, longitude)
+    private var centeredLocation: GeoPoint = GeoPoint(0.0, 0.0) // Location of camera
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,11 +50,9 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
         mMap = root.findViewById(R.id.map)
 
         setupMapOptions()
-        val mapController = mMap.controller
+        addUserPin()
+        mapController = mMap.controller
         mapController.setZoom(3.1)
-        changeCenterLocation(curLocation)
-
-
         return root
     }
 
@@ -77,7 +77,14 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
         addRotationOverlay()
 
     }
-
+    private fun addUserPin(){
+        val startMarker = Marker(mMap)
+        startMarker.position = centeredLocation
+        startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+        startMarker.icon = ResourcesCompat.getDrawable(resources, R.drawable.user_pin, null)
+        mMap.overlays.add(startMarker)
+        Log.d("Marker", "Adding user marker!")
+    }
     private fun addRotationOverlay() {
         val rotationGestureOverlay = RotationGestureOverlay(mMap)
         rotationGestureOverlay.isEnabled
@@ -87,7 +94,8 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
 
     private fun addLocationOverlay() {
         mLocationOverlay = MyLocationNewOverlay(GpsMyLocationProvider(context), mMap);
-        this.mLocationOverlay.enableMyLocation();
+        this.mLocationOverlay.enableMyLocation()
+        mLocationOverlay.setPersonIcon(null) // Hides the default person icon
         mMap.overlays.add(mLocationOverlay)
     }
 
@@ -98,12 +106,10 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
     }
 
     private fun addCopyrightOverlay() {
-        val copyrightNotice: String =
-            mMap.tileProvider.tileSource.copyrightNotice
+        val copyrightNotice: String = mMap.tileProvider.tileSource.copyrightNotice
         val copyrightOverlay = CopyrightOverlay(context)
         copyrightOverlay.setCopyrightNotice(copyrightNotice)
         mMap.overlays.add(copyrightOverlay)
-
     }
 
     private fun addMapScaleOverlay() {
@@ -114,11 +120,9 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
         mMap.overlays.add(scaleBarOverlay)
     }
 
-    fun changeCenterLocation(geoPoint: GeoPoint) {
-        curLocation = geoPoint
-        val mapController = mMap.controller
-        mapController.setCenter(curLocation);
-
+    private fun changeCenterLocation(geoPoint: GeoPoint) {
+        centeredLocation = geoPoint
+        mapController.setCenter(centeredLocation)
     }
 
     companion object {
@@ -132,6 +136,12 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
 
     override fun onMarkerClick(marker: Marker?, mapView: MapView?): Boolean {
         TODO("Not yet implemented")
+    }
+
+    fun updateCurrentLocation(location: Location) {
+        mCurrentLocation = location  // Assigns the updated location to my current location variable
+        centeredLocation = GeoPoint(location.latitude, location.longitude) // Transforms location to geopoint
+        changeCenterLocation(centeredLocation) // Updates centered location
     }
 
 }

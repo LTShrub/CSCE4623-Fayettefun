@@ -1,6 +1,7 @@
 package com.example.fayettefun.MapActivity
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
@@ -12,85 +13,29 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import com.example.fayettefun.R
 import com.example.fayettefun.Util.LocationUtilCallback
+import com.example.fayettefun.Util.createLocationCallback
+import com.example.fayettefun.Util.createLocationRequest
+import com.example.fayettefun.Util.getLastLocation
 import com.example.fayettefun.Util.replaceFragmentInActivity
+import com.example.fayettefun.Util.stopLocationUpdates
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationServices
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import org.osmdroid.config.Configuration
+import kotlin.properties.Delegates
 
 class MapView : AppCompatActivity() {
 
-    private lateinit var mapsFragment: OpenStreetMapFragment // Instance of map fragment
+    private lateinit var mapsFragment: OpenStreetMapFragment // Instance variables of te map
 
-    // Permission flag variables
+    // Permission and location variables
     private var locationPermissionEnabled: Boolean = false
     private var locationRequestsEnabled: Boolean = false
-    private var cameraPermissionEnabled: Boolean = false
-    private var centeredCamera = false // Used to centered
+    private lateinit var locationProviderClient: FusedLocationProviderClient
+    private lateinit var mLocationCallback: LocationCallback
+    private var centeredCamera = false
 
-
-    private val requestPermissionLauncher =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
-            if (isGranted) {
-                Log.d("MapsActivity","Permission Granted")
-            } else {
-                Toast.makeText(this,"Location Permissions not granted. Location disabled on map",
-                    Toast.LENGTH_LONG).show()
-            }
-        }
-
-    private val locationUtilCallback = object : LocationUtilCallback {
-        override fun requestPermissionCallback() {
-            locationPermissionRequest.launch(
-                arrayOf(
-                    Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-                )
-            )
-        }
-        override fun locationUpdatedCallback(location: Location) {
-            if(!centeredCamera){
-                mapsFragment.updateCurrentLocation(location)
-                centeredCamera = true
-            }
-            mLatitude = location.latitude
-            mLongitude = location.longitude
-        }
-    }
-
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_map)
-
-
-        //Get preferences for tile cache
-        Configuration.getInstance().load(this, PreferenceManager.getDefaultSharedPreferences(this))
-
-        //Check for location permissions
-        checkForLocationPermission()
-
-        //Get access to mapsFragment object
-        mapsFragment = supportFragmentManager.findFragmentById(R.id.map_fragment_container)
-                as OpenStreetMapFragment? ?: OpenStreetMapFragment.newInstance().also {
-            replaceFragmentInActivity(it, R.id.map_fragment_container)
-        }
-
-
-    }
-
-    private fun checkForLocationPermission(){
-        when {
-            ContextCompat.checkSelfPermission(
-                this, Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED -> {
-                //getLastKnownLocation()
-                //registerLocationUpdateCallbacks()
-            }
-            else -> {
-                requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
-            }
-        }
-    }
 
     private val locationPermissionRequest = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
@@ -111,6 +56,65 @@ class MapView : AppCompatActivity() {
         }
     }
 
+    private val locationUtilCallback = object : LocationUtilCallback {
+        override fun requestPermissionCallback() {
+            locationPermissionRequest.launch(
+                arrayOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                )
+            )
+        }
+        override fun locationUpdatedCallback(location: Location) {
+            if(!centeredCamera){
+                mapsFragment.updateCurrentLocation(location)
+                centeredCamera = true
+            }
+
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_map)
+
+        Configuration.getInstance().load(this, PreferenceManager.getDefaultSharedPreferences(this))
+
+        mapsFragment = supportFragmentManager.findFragmentById(R.id.map_fragment_container)
+                as OpenStreetMapFragment? ?: OpenStreetMapFragment.newInstance().also {
+            replaceFragmentInActivity(it, R.id.map_fragment_container)
+        }
+        locationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+        getLastLocation(this, locationProviderClient, locationUtilCallback)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        startLocationRequests()
+        //Log.d("MainActivity", "mLatitude: $mLatitude, mLongitude: $mLongitude")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        // switch location flag back to off to get centered camera again
+    }
+
+
+    override fun onStop() {
+        super.onStop()
+        if (locationRequestsEnabled) {
+            locationRequestsEnabled = false
+            stopLocationUpdates(locationProviderClient, mLocationCallback)
+        }
+    }
+
+    private fun startLocationRequests() {
+        if (!locationRequestsEnabled) {
+            mLocationCallback = createLocationCallback(locationUtilCallback)
+            locationRequestsEnabled =
+                createLocationRequest(this, locationProviderClient, mLocationCallback)
+        }
+    }
 
 }
 
