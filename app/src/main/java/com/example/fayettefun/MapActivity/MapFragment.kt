@@ -29,7 +29,6 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
     private lateinit var mMap: MapView
     private lateinit var userMarker: Marker
     private lateinit var mapController: IMapController
-    private lateinit var mLocationOverlay: MyLocationNewOverlay
     private lateinit var mCompassOverlay: CompassOverlay
 
     // Location variables
@@ -69,10 +68,7 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
     private fun setupMapOptions() {
         mMap.isTilesScaledToDpi = true
         mMap.setTileSource(TileSourceFactory.MAPNIK)
-        mMap.zoomController.setVisibility(CustomZoomButtonsController.Visibility.ALWAYS)
         addCopyrightOverlay()
-        addCompassOverlay()
-        addMapScaleOverlay()
         addRotationOverlay()
 
     }
@@ -91,12 +87,6 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
         mMap.overlays.add(rotationGestureOverlay)
     }
 
-    private fun addCompassOverlay() {
-        mCompassOverlay = CompassOverlay(context, InternalCompassOrientationProvider(context), mMap)
-        mCompassOverlay.enableCompass()
-        mMap.overlays.add(mCompassOverlay)
-    }
-
     private fun addCopyrightOverlay() {
         val copyrightNotice: String = mMap.tileProvider.tileSource.copyrightNotice
         val copyrightOverlay = CopyrightOverlay(context)
@@ -107,10 +97,9 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
     private fun addMapScaleOverlay() {
         val dm: DisplayMetrics = context?.resources?.displayMetrics ?: return
         val scaleBarOverlay = ScaleBarOverlay(mMap)
-        scaleBarOverlay.setCentred(true)
-        scaleBarOverlay.setScaleBarOffset(dm.widthPixels / 2, 10)
         mMap.overlays.add(scaleBarOverlay)
     }
+
 
     private fun changeCenterLocation(geoPoint: GeoPoint) {
         centeredLocation = geoPoint
@@ -134,10 +123,6 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
         mCurrentLocation = location  // Assigns the updated location to my current location variable
         centeredLocation = GeoPoint(location.latitude, location.longitude) // Transforms location to geopoint
         changeCenterLocation(centeredLocation) // Updates centered location
-    }
-
-    fun updateUserLocation(location: Location) {
-
     }
 
 }

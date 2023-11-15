@@ -40,6 +40,7 @@ class MapView : AppCompatActivity() {
 
     // On-Screen Buttons
     private lateinit var centerCameraButton: ImageButton
+    private lateinit var randomEventButton: ImageButton
 
 
     private val locationPermissionRequest = registerForActivityResult(
@@ -94,11 +95,14 @@ class MapView : AppCompatActivity() {
         getLastLocation(this, locationProviderClient, locationUtilCallback)
 
         centerCameraButton = findViewById(R.id.center_camera_button)
+        randomEventButton = findViewById(R.id.random_event_button)
 
-        centerCameraButton.setOnClickListener {
-            // When pressed it will center the camera on the user
+        centerCameraButton.setOnClickListener { // When pressed it will center the camera on the user
             centeredCamera = false
             Log.d("Center Camera Button", "Clicking")
+        }
+        randomEventButton.setOnClickListener {  // It will take the user to a random local event
+            Log.d("Random Button", "Clicking")
         }
     }
 
