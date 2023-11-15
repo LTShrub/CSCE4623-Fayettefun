@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.util.Log
+import android.widget.Button
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
@@ -35,6 +37,9 @@ class MapView : AppCompatActivity() {
     private lateinit var locationProviderClient: FusedLocationProviderClient
     private lateinit var mLocationCallback: LocationCallback
     private var centeredCamera = false
+
+    // On-Screen Buttons
+    private lateinit var centerCameraButton: ImageButton
 
 
     private val locationPermissionRequest = registerForActivityResult(
@@ -87,17 +92,24 @@ class MapView : AppCompatActivity() {
         }
         locationProviderClient = LocationServices.getFusedLocationProviderClient(this)
         getLastLocation(this, locationProviderClient, locationUtilCallback)
+
+        centerCameraButton = findViewById(R.id.center_camera_button)
+
+        centerCameraButton.setOnClickListener {
+            // When pressed it will center the camera on the user
+            centeredCamera = false
+            Log.d("Center Camera Button", "Clicking")
+        }
     }
 
     override fun onStart() {
         super.onStart()
         startLocationRequests()
-        //Log.d("MainActivity", "mLatitude: $mLatitude, mLongitude: $mLongitude")
     }
 
     override fun onRestart() {
         super.onRestart()
-        // switch location flag back to off to get centered camera again
+        centeredCamera = false // Centered camera is centered again when this is false
     }
 
 
