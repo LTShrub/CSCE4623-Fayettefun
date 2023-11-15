@@ -27,6 +27,7 @@ import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
 
     private lateinit var mMap: MapView
+    private lateinit var userMarker: Marker
     private lateinit var mapController: IMapController
     private lateinit var mLocationOverlay: MyLocationNewOverlay
     private lateinit var mCompassOverlay: CompassOverlay
@@ -48,9 +49,9 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
         // Inflate the layout for this fragment
         val root = inflater.inflate(R.layout.fragment_map, container, false)
         mMap = root.findViewById(R.id.map)
-
-        setupMapOptions()
-        addUserPin()
+        userMarker = Marker(mMap) // Initializes user maker to map
+        setupMapOptions() // Sets ups map options
+        addUserMarker() // Add user marker to the map
         mapController = mMap.controller
         mapController.setZoom(3.1)
         return root
@@ -77,12 +78,11 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
         addRotationOverlay()
 
     }
-    private fun addUserPin(){
-        val startMarker = Marker(mMap)
-        startMarker.position = centeredLocation
-        startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-        startMarker.icon = ResourcesCompat.getDrawable(resources, R.drawable.user_pin, null)
-        mMap.overlays.add(startMarker)
+    private fun addUserMarker(){
+        userMarker.position = centeredLocation
+        userMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+        userMarker.icon = ResourcesCompat.getDrawable(resources, R.drawable.user_pin, null)
+        mMap.overlays.add(userMarker)
         Log.d("Marker", "Adding user marker!")
     }
     private fun addRotationOverlay() {
@@ -142,6 +142,10 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
         mCurrentLocation = location  // Assigns the updated location to my current location variable
         centeredLocation = GeoPoint(location.latitude, location.longitude) // Transforms location to geopoint
         changeCenterLocation(centeredLocation) // Updates centered location
+    }
+
+    fun updateUserLocation(location: Location) {
+
     }
 
 }

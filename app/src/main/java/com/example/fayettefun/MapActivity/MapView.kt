@@ -70,6 +70,7 @@ class MapView : AppCompatActivity() {
                 mapsFragment.updateCurrentLocation(location)
                 centeredCamera = true
             }
+            mapsFragment.updateUserLocation(location)
 
         }
     }
