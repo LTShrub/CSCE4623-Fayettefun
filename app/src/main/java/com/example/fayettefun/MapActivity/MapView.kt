@@ -66,11 +66,11 @@ class MapView : AppCompatActivity() {
             )
         }
         override fun locationUpdatedCallback(location: Location) {
-            if(!centeredCamera){
+            if(!centeredCamera){ // Changes the camera center once when the activity is launched
                 mapsFragment.updateCurrentLocation(location)
                 centeredCamera = true
             }
-            mapsFragment.updateUserLocation(location)
+            mapsFragment.addUserMarker(location) // Updates the location of the user marker all the time
 
         }
     }

@@ -46,14 +46,13 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val root = inflater.inflate(R.layout.fragment_map, container, false)
         mMap = root.findViewById(R.id.map)
-        userMarker = Marker(mMap) // Initializes user maker to map
+        userMarker = Marker(mMap) // Initializes user maker
         setupMapOptions() // Sets ups map options
-        addUserMarker() // Add user marker to the map
-        mapController = mMap.controller
-        mapController.setZoom(3.1)
+
+        mapController = mMap.controller // Sets up map controller
+        mapController.setZoom(3.1) // Adjusts map zoom
         return root
     }
 
@@ -72,31 +71,24 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
         mMap.setTileSource(TileSourceFactory.MAPNIK)
         mMap.zoomController.setVisibility(CustomZoomButtonsController.Visibility.ALWAYS)
         addCopyrightOverlay()
-        addLocationOverlay()
         addCompassOverlay()
         addMapScaleOverlay()
         addRotationOverlay()
 
     }
-    private fun addUserMarker(){
-        userMarker.position = centeredLocation
+    fun addUserMarker(location: Location){
+        val userLocation = GeoPoint(location.latitude, location.longitude)
+        userMarker.position = userLocation
         userMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
         userMarker.icon = ResourcesCompat.getDrawable(resources, R.drawable.user_pin, null)
         mMap.overlays.add(userMarker)
-        Log.d("Marker", "Adding user marker!")
+        Log.d("Marker", "Updating user marker location")
     }
     private fun addRotationOverlay() {
         val rotationGestureOverlay = RotationGestureOverlay(mMap)
         rotationGestureOverlay.isEnabled
         mMap.setMultiTouchControls(true)
         mMap.overlays.add(rotationGestureOverlay)
-    }
-
-    private fun addLocationOverlay() {
-        mLocationOverlay = MyLocationNewOverlay(GpsMyLocationProvider(context), mMap);
-        this.mLocationOverlay.enableMyLocation()
-        mLocationOverlay.setPersonIcon(null) // Hides the default person icon
-        mMap.overlays.add(mLocationOverlay)
     }
 
     private fun addCompassOverlay() {
