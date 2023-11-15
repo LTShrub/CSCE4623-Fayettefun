@@ -20,10 +20,13 @@
         android:id="@+id/center_camera_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="0dp"
         android:layout_margin="20dp"
-        app:srcCompat="@drawable/osm_ic_center_map"
+        android:layout_marginLeft="344dp"
+        android:layout_marginBottom="664dp"
+        android:padding="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:srcCompat="@drawable/osm_ic_center_map" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
