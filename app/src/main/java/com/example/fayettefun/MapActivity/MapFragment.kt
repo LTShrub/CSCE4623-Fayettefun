@@ -93,7 +93,7 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
         copyrightOverlay.setCopyrightNotice(copyrightNotice)
         mMap.overlays.add(copyrightOverlay)
     }
-    
+
     private fun changeCenterLocation(geoPoint: GeoPoint) {
         centeredLocation = geoPoint
         mapController.setCenter(centeredLocation)
