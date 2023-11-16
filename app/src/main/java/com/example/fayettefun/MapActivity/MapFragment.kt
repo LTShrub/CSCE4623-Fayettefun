@@ -29,7 +29,6 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
     private lateinit var mMap: MapView
     private lateinit var userMarker: Marker
     private lateinit var mapController: IMapController
-    private lateinit var mCompassOverlay: CompassOverlay
 
     // Location variables
     private lateinit var mCurrentLocation: Location // Current location(latitude, longitude)
@@ -72,7 +71,7 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
         addRotationOverlay()
 
     }
-    fun addUserMarker(location: Location){
+    fun addUserMarker(location: Location){ // Used to update the location of the user marker real-time
         val userLocation = GeoPoint(location.latitude, location.longitude)
         userMarker.position = userLocation
         userMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
@@ -84,6 +83,7 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
         val rotationGestureOverlay = RotationGestureOverlay(mMap)
         rotationGestureOverlay.isEnabled
         mMap.setMultiTouchControls(true)
+        mMap.zoomController.setVisibility(CustomZoomButtonsController.Visibility.NEVER)  // Makes zoom controls not be visible
         mMap.overlays.add(rotationGestureOverlay)
     }
 
@@ -93,14 +93,7 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
         copyrightOverlay.setCopyrightNotice(copyrightNotice)
         mMap.overlays.add(copyrightOverlay)
     }
-
-    private fun addMapScaleOverlay() {
-        val dm: DisplayMetrics = context?.resources?.displayMetrics ?: return
-        val scaleBarOverlay = ScaleBarOverlay(mMap)
-        mMap.overlays.add(scaleBarOverlay)
-    }
-
-
+    
     private fun changeCenterLocation(geoPoint: GeoPoint) {
         centeredLocation = geoPoint
         mapController.setCenter(centeredLocation)

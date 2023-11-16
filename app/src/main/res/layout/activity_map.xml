@@ -18,25 +18,27 @@
 
     <ImageButton
         android:id="@+id/center_camera_button"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_margin="10dp"
         android:padding="0dp"
         android:background="@color/cardview_dark_background"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:srcCompat="@drawable/user_location_icon" />
+        app:srcCompat="@drawable/user_location_icon"
+        android:contentDescription="Center Camera" />
 
     <ImageButton
         android:id="@+id/user_profile_button"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_margin="10dp"
         android:padding="0dp"
         android:background="@color/cardview_dark_background"
         app:layout_constraintTop_toBottomOf="@id/center_camera_button"
         app:layout_constraintRight_toRightOf="parent"
-        app:srcCompat="@drawable/user_profile_icon" />
+        app:srcCompat="@drawable/user_profile_icon"
+        android:contentDescription="User Profile" />
 
     <ImageButton
         android:id="@+id/random_event_button"
@@ -48,6 +50,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:srcCompat="@drawable/random_icon" />
+        app:srcCompat="@drawable/random_icon"
+        android:contentDescription="Random Event"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
