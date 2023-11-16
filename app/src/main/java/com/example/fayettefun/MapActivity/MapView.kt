@@ -13,6 +13,7 @@ import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import com.example.fayettefun.ProfileActivity.ProfileView
 import com.example.fayettefun.R
 import com.example.fayettefun.Util.LocationUtilCallback
 import com.example.fayettefun.Util.createLocationCallback
@@ -74,8 +75,8 @@ class MapView : AppCompatActivity() {
             Log.d("Random Button", "Clicking")
         }
         userProfileButton.setOnClickListener {  // It will take the user to their profile
-            // Starts the user profile activity
-            Log.d("User Profile Button", "Clicking")
+            val intent = Intent(this, ProfileView::class.java)
+            startActivity(intent)
         }
     }
 
