@@ -1,4 +1,4 @@
-package com.example.fayettefun.ProfileActivity
+package com.example.fayettefun.View
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

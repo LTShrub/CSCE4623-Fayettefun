@@ -18,10 +18,11 @@
         android:theme="@style/AppTheme"
         tools:targetApi="34">
         <activity
-            android:name=".ProfileActivity.ProfileView"
-            android:exported="false" />
+            android:name=".View.ProfileView"
+            android:exported="false"
+            android:parentActivityName=".View.MapView"/>
         <activity
-            android:name=".MapActivity.MapView"
+            android:name=".View.MapView"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

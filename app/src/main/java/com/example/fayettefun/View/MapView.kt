@@ -1,21 +1,18 @@
-package com.example.fayettefun.MapActivity
+package com.example.fayettefun.View
 
 import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.util.Log
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContextCompat
-import com.example.fayettefun.ProfileActivity.ProfileView
 import com.example.fayettefun.R
 import com.example.fayettefun.Util.LocationUtilCallback
+import com.example.fayettefun.Util.OpenStreetMapFragment
 import com.example.fayettefun.Util.createLocationCallback
 import com.example.fayettefun.Util.createLocationRequest
 import com.example.fayettefun.Util.getLastLocation
@@ -24,9 +21,7 @@ import com.example.fayettefun.Util.stopLocationUpdates
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationServices
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import org.osmdroid.config.Configuration
-import kotlin.properties.Delegates
 
 class MapView : AppCompatActivity() {
 

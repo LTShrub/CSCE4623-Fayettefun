@@ -1,8 +1,7 @@
-package com.example.fayettefun.MapActivity
+package com.example.fayettefun.Util
 
 import android.location.Location
 import android.os.Bundle
-import android.util.DisplayMetrics
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -17,12 +16,7 @@ import org.osmdroid.views.CustomZoomButtonsController
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.CopyrightOverlay
 import org.osmdroid.views.overlay.Marker
-import org.osmdroid.views.overlay.ScaleBarOverlay
-import org.osmdroid.views.overlay.compass.CompassOverlay
-import org.osmdroid.views.overlay.compass.InternalCompassOrientationProvider
 import org.osmdroid.views.overlay.gestures.RotationGestureOverlay
-import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider
-import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 
 class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
 
