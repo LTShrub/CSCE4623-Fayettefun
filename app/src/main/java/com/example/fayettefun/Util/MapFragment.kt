@@ -25,8 +25,7 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
     private lateinit var mapController: IMapController
 
     // Location variables
-    private lateinit var mCurrentLocation: Location // Current location(latitude, longitude)
-    private var centeredLocation: GeoPoint = GeoPoint(0.0, 0.0) // Location of camera
+    private lateinit var mCurrentLocation: GeoPoint
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +43,7 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
         setupMapOptions() // Sets ups map options
 
         mapController = mMap.controller // Sets up map controller
-        mapController.setZoom(3.1) // Adjusts map zoom
+        mapController.setZoom(17.0) // Adjusts map zoom
         return root
     }
 
@@ -65,14 +64,15 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
         addRotationOverlay()
 
     }
-    fun addUserMarker(location: Location){ // Used to update the location of the user marker real-time
-        val userLocation = GeoPoint(location.latitude, location.longitude)
-        userMarker.position = userLocation
+    private fun addUserMarker() {
+        mMap.overlays.remove(userMarker) // Remove existing user marker
+        userMarker.position = mCurrentLocation // Updates marker position
         userMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-        userMarker.icon = ResourcesCompat.getDrawable(resources, R.drawable.user_pin, null)
-        mMap.overlays.add(userMarker)
-        Log.d("Marker", "Updating user marker location")
+        userMarker.icon = ResourcesCompat.getDrawable(resources, R.drawable.user_pin, null) // Marker icon
+        mMap.overlays.add(userMarker) // Add the updated user marker
+        mMap.invalidate() // Force map redraw
     }
+
     private fun addRotationOverlay() {
         val rotationGestureOverlay = RotationGestureOverlay(mMap)
         rotationGestureOverlay.isEnabled
@@ -88,9 +88,10 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
         mMap.overlays.add(copyrightOverlay)
     }
 
-    private fun changeCenterLocation(geoPoint: GeoPoint) {
-        centeredLocation = geoPoint
-        mapController.setCenter(centeredLocation)
+    fun centerLocation() {
+        if (::mapController.isInitialized) {
+            mapController.setCenter(mCurrentLocation)
+        }
     }
 
     companion object {
@@ -107,9 +108,8 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
     }
 
     fun updateCurrentLocation(location: Location) {
-        mCurrentLocation = location  // Assigns the updated location to my current location variable
-        centeredLocation = GeoPoint(location.latitude, location.longitude) // Transforms location to geopoint
-        changeCenterLocation(centeredLocation) // Updates centered location
+        mCurrentLocation = GeoPoint(location.latitude, location.longitude) // Transforms current location to geolocation
+        addUserMarker()
     }
 
 }
