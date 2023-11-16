@@ -10,24 +10,10 @@
     </style>
 
     <!-- Button styles and shapes -->
-    <style name="StrokeButton" parent="Widget.MaterialComponents.Button">
-        <item name="backgroundTint">@null</item> <!-- Disables the default background tint -->
-        <item name="android:background">@drawable/stroke_button</item>
-    </style>
-
-    <style name="RectangleButton" parent="Widget.MaterialComponents.Button">
-        <item name="backgroundTint">@null</item>
-        <item name="android:background">@drawable/rectangle_button</item>
-    </style>
-
     <style name="RoundButton" parent="Widget.MaterialComponents.Button">
-        <item name="backgroundTint">@null</item>
+        <item name="backgroundTint">@null</item> <!-- Overwrites the custom theme -->
         <item name="android:background">@drawable/round_button</item>
     </style>
 
-    <style name="GradientButton" parent="Widget.MaterialComponents.Button">
-        <item name="backgroundTint">@null</item>
-        <item name="android:background">@drawable/gradient_button</item>
-    </style>
 
 </resources>
