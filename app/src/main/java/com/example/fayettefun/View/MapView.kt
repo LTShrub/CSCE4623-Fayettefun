@@ -2,6 +2,7 @@ package com.example.fayettefun.View
 
 import android.Manifest
 import android.content.Intent
+import android.graphics.PorterDuff
 import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,6 +11,7 @@ import android.util.Log
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import com.example.fayettefun.R
 import com.example.fayettefun.Util.LocationUtilCallback
 import com.example.fayettefun.Util.OpenStreetMapFragment

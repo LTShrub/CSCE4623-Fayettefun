@@ -7,6 +7,6 @@ import com.example.fayettefun.R
 class ProfileView : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profile_view)
+        setContentView(R.layout.activity_profile)
     }
 }
