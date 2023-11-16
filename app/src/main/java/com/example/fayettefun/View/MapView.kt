@@ -32,6 +32,7 @@ class MapView : AppCompatActivity() {
     // Permission and location variables
     private var locationPermissionEnabled: Boolean = false
     private var locationRequestsEnabled: Boolean = false
+    private var centerCamera = true // Used to center the camera on the user marker initially and when returning to activity
     private lateinit var locationProviderClient: FusedLocationProviderClient
     private lateinit var mLocationCallback: LocationCallback
 
@@ -86,6 +87,7 @@ class MapView : AppCompatActivity() {
 
     override fun onRestart() {
         super.onRestart()
+        centerCamera = true
     }
 
 
@@ -135,6 +137,10 @@ class MapView : AppCompatActivity() {
         }
         override fun locationUpdatedCallback(location: Location) {
             mapsFragment.updateCurrentLocation(location)
+            if(centerCamera){ // If true it centers the camera on the user's position
+                mapsFragment.centerLocation()
+                centerCamera = false
+            }
         }
     }
 
