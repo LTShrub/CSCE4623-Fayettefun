@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -60,6 +61,7 @@ dependencies {
     //OpenStreetMap Components
     implementation("org.osmdroid:osmdroid-android:6.1.14")
     implementation("com.google.android.gms:play-services-location:21.0.1")
+    implementation("com.google.firebase:firebase-database:20.3.0")
 
     // Testing
     testImplementation("junit:junit:4.13.2")
