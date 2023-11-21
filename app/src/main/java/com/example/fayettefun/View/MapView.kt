@@ -87,7 +87,7 @@ class MapView : AppCompatActivity() {
 
     override fun onRestart() {
         super.onRestart()
-        centerCamera = true
+        centerCamera = true // Makes the camera get focused over the user after coming back to the activity
     }
 
 
