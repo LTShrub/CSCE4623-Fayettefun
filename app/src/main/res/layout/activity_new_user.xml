@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background">
+
+    <ImageView
+        android:id="@+id/imageViewProfile"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="84dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <EditText
+        android:id="@+id/editTextUsername"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="24dp"
+        android:hint="Username"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewProfile" />
+
+    <EditText
+        android:id="@+id/editTextAboutMe"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="About me"
+        android:inputType="textMultiLine"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="@+id/editTextUsername"
+        app:layout_constraintStart_toStartOf="@+id/editTextUsername"
+        app:layout_constraintTop_toBottomOf="@+id/editTextUsername" />
+
+    <Button
+        android:id="@+id/buttonCreateUser"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Create User"
+        android:textColor="#000"
+        app:layout_constraintTop_toBottomOf="@+id/editTextAboutMe"
+        app:layout_constraintStart_toStartOf="@+id/editTextAboutMe"
+        app:layout_constraintEnd_toEndOf="@+id/editTextAboutMe"
+        android:layout_marginTop="24dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
