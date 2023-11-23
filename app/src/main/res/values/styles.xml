@@ -9,7 +9,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <!-- The default font for RecyclerView items is too small.
-    The margin is a simple delimiter between the words. -->
+    <!-- Button styles and shapes -->
+    <style name="RoundButton" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@null</item> <!-- Overwrites the custom theme -->
+        <item name="android:background">@drawable/round_button</item>
+    </style>
+
 
 </resources>
