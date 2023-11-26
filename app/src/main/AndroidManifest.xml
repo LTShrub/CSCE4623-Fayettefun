@@ -18,9 +18,12 @@
         android:theme="@style/AppTheme"
         tools:targetApi="34">
         <activity
+            android:name=".View.CreateEventView"
+            android:exported="false" />
+        <activity
             android:name=".View.ProfileView"
             android:exported="false"
-            android:parentActivityName=".View.MapView"/>
+            android:parentActivityName=".View.MapView" />
         <activity
             android:name=".View.MapView"
             android:exported="true">
