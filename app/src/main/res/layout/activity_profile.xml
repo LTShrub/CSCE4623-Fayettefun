@@ -28,7 +28,6 @@
             android:text="Lionel Andres Messi"
             android:textSize="20sp"
             android:textColor="@color/white"
-            android:fontFamily="@font/Bosento"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp">
         </TextView>
@@ -47,14 +46,26 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/active_events_button"
+        android:id="@+id/button1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="Active Events"
+        android:text="My Registrations"
         android:textAlignment="center"
         android:textColor="@color/charcoal"
         style="@style/ProfileButtons">
     </Button>
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Created Events"
+        android:textAlignment="center"
+        android:textColor="@color/charcoal"
+        style="@style/ProfileButtons">
+    </Button>
+    
 
 </LinearLayout>
