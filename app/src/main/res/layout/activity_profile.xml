@@ -46,4 +46,15 @@
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/active_events_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Active Events"
+        android:textAlignment="center"
+        android:textColor="@color/charcoal"
+        style="@style/ProfileButtons">
+    </Button>
+
 </LinearLayout>

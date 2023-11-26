@@ -15,5 +15,10 @@
         <item name="android:background">@drawable/round_button</item>
     </style>
 
+    <style name="ProfileButtons" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@null</item> <!-- Overwrites the custom theme -->
+        <item name="android:background">@drawable/profile_button</item>
+    </style>
+
 
 </resources>
