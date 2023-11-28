@@ -2,7 +2,6 @@ package com.example.fayettefun.View
 
 import android.Manifest
 import android.content.Intent
-import android.graphics.PorterDuff
 import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,7 +10,6 @@ import android.util.Log
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContextCompat
 import com.example.fayettefun.R
 import com.example.fayettefun.Util.LocationUtilCallback
 import com.example.fayettefun.Util.OpenStreetMapFragment
@@ -25,21 +23,22 @@ import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationServices
 import org.osmdroid.config.Configuration
 
-class MapView : AppCompatActivity() {
+class Map : AppCompatActivity() {
 
     private lateinit var mapsFragment: OpenStreetMapFragment // Instance variables of map fragment
 
     // Permission and location variables
     private var locationPermissionEnabled: Boolean = false
     private var locationRequestsEnabled: Boolean = false
+    private var centerCamera = true // Used to center the camera on the user marker initially and when returning to activity
     private lateinit var locationProviderClient: FusedLocationProviderClient
     private lateinit var mLocationCallback: LocationCallback
-    private var centeredCamera = false // If it is false, camera is focused. Once it is true camera is not focused.
 
     // On-Screen Buttons
     private lateinit var centerCameraButton: ImageButton
     private lateinit var randomEventButton: ImageButton
     private lateinit var userProfileButton: ImageButton
+    private lateinit var newEventButton: ImageButton
 
 
 
@@ -58,21 +57,28 @@ class MapView : AppCompatActivity() {
         locationProviderClient = LocationServices.getFusedLocationProviderClient(this)
         getLastLocation(this, locationProviderClient, locationUtilCallback)
 
+        // Centers the camera
+        mapsFragment.centerLocation()
+
         // Initializes buttons
         centerCameraButton = findViewById(R.id.center_camera_button)
         randomEventButton = findViewById(R.id.random_event_button)
         userProfileButton = findViewById(R.id.user_profile_button)
+        newEventButton = findViewById(R.id.new_event_button)
 
         // OnClickListener for buttons
         centerCameraButton.setOnClickListener { // When pressed it will center the camera on the user
-            centeredCamera = false
-            Log.d("Center Camera Button", "Clicking")
+            mapsFragment.centerLocation()
         }
         randomEventButton.setOnClickListener {  // It will take the user to a random local event
             Log.d("Random Button", "Clicking")
         }
         userProfileButton.setOnClickListener {  // It will take the user to their profile
-            val intent = Intent(this, ProfileView::class.java)
+            val intent = Intent(this, Profile::class.java)
+            startActivity(intent)
+        }
+        newEventButton.setOnClickListener {
+            val intent = Intent(this, CreateEvent::class.java) // It will take user to event creation activity
             startActivity(intent)
         }
     }
@@ -84,7 +90,7 @@ class MapView : AppCompatActivity() {
 
     override fun onRestart() {
         super.onRestart()
-        centeredCamera = false // Centered camera is centered again when this is false
+        centerCamera = true // Makes the camera get focused over the user after coming back to the activity
     }
 
 
@@ -133,12 +139,11 @@ class MapView : AppCompatActivity() {
             )
         }
         override fun locationUpdatedCallback(location: Location) {
-            if(!centeredCamera){ // Changes the camera center once when the activity is launched
-                mapsFragment.updateCurrentLocation(location)
-                centeredCamera = true
+            mapsFragment.updateCurrentLocation(location)
+            if(centerCamera){ // If true it centers the camera on the user's position
+                mapsFragment.centerLocation()
+                centerCamera = false
             }
-            mapsFragment.addUserMarker(location) // Updates the location of the user marker all the time
-
         }
     }
 

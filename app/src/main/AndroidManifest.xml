@@ -18,11 +18,15 @@
         android:theme="@style/AppTheme"
         tools:targetApi="34">
         <activity
-            android:name=".View.ProfileView"
+            android:name=".View.CreateEvent"
             android:exported="false"
-            android:parentActivityName=".View.MapView"/>
+            android:parentActivityName=".View.Map"/>
         <activity
-            android:name=".View.MapView"
+            android:name=".View.Profile"
+            android:exported="false"
+            android:parentActivityName=".View.Map" />
+        <activity
+            android:name=".View.Map"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

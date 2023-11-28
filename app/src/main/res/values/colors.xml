@@ -5,4 +5,6 @@
     <color name="colorAccent">#611327</color>
     <color name="charcoal">#36454F</color>
     <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+
 </resources>
