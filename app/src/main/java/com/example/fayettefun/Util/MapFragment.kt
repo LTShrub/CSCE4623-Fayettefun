@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
@@ -44,6 +45,7 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
 
         mapController = mMap.controller // Sets up map controller
         mapController.setZoom(17.0) // Adjusts map zoom
+
         return root
     }
 
@@ -71,6 +73,13 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
         userMarker.icon = ResourcesCompat.getDrawable(resources, R.drawable.user_pin, null) // Marker icon
         mMap.overlays.add(userMarker) // Add the updated user marker
         mMap.invalidate() // Force map redraw
+    }
+
+    private fun addEventMarker() {
+        userMarker.position = mCurrentLocation // Updates marker position
+        userMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+        userMarker.icon = ResourcesCompat.getDrawable(resources, R.drawable.temp_even_icon, null) // Marker icon
+        mMap.overlays.add(userMarker) // Add the updated user marker
     }
 
     private fun addRotationOverlay() {

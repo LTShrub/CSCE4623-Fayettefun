@@ -19,7 +19,8 @@
         tools:targetApi="34">
         <activity
             android:name=".View.CreateEvent"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".View.Map"/>
         <activity
             android:name=".View.Profile"
             android:exported="false"

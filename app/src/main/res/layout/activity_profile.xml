@@ -53,7 +53,7 @@
         android:text="My Registrations"
         android:textAlignment="center"
         android:textColor="@color/charcoal"
-        style="@style/ProfileButtons">
+        style="@style/OvalButtons">
     </Button>
 
     <Button
@@ -64,7 +64,7 @@
         android:text="Created Events"
         android:textAlignment="center"
         android:textColor="@color/charcoal"
-        style="@style/ProfileButtons">
+        style="@style/OvalButtons">
     </Button>
 
     <androidx.recyclerview.widget.RecyclerView
