@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.example.fayettefun.R
 
-class ProfileView : AppCompatActivity() {
+class Profile : AppCompatActivity() {
 
     // Instance variables
     private lateinit var picture: ImageView

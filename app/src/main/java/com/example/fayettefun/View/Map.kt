@@ -2,7 +2,6 @@ package com.example.fayettefun.View
 
 import android.Manifest
 import android.content.Intent
-import android.graphics.PorterDuff
 import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,7 +10,6 @@ import android.util.Log
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContextCompat
 import com.example.fayettefun.R
 import com.example.fayettefun.Util.LocationUtilCallback
 import com.example.fayettefun.Util.OpenStreetMapFragment
@@ -25,7 +23,7 @@ import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationServices
 import org.osmdroid.config.Configuration
 
-class MapView : AppCompatActivity() {
+class Map : AppCompatActivity() {
 
     private lateinit var mapsFragment: OpenStreetMapFragment // Instance variables of map fragment
 
@@ -74,7 +72,7 @@ class MapView : AppCompatActivity() {
             Log.d("Random Button", "Clicking")
         }
         userProfileButton.setOnClickListener {  // It will take the user to their profile
-            val intent = Intent(this, ProfileView::class.java)
+            val intent = Intent(this, Profile::class.java)
             startActivity(intent)
         }
         Log.d("MapView", "Created")
