@@ -6,5 +6,6 @@
     <color name="charcoal">#36454F</color>
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
+    <color name="blue">#303F9F</color>
 
 </resources>
