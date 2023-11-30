@@ -1,7 +1,6 @@
 package com.example.fayettefun.Model
 
 //
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 class FirebaseRepository {
     private val database = FirebaseDatabase.getInstance()
