@@ -9,6 +9,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import com.example.fayettefun.Model.MapPoint
 import com.example.fayettefun.R
 import java.util.Calendar
 import java.util.Locale
@@ -89,6 +90,9 @@ class CreateEvent : AppCompatActivity() {
         Log.d("Description", "$setDescription")
         Log.d("Latitude", "$setLatitude")
         Log.d("Longitude", "$setLongitude")
+
+        // Create MapPoint object to add it as a record to Firebase
+        val newEvent = MapPoint(setLatitude, setLongitude, setName, setDate, setTime, setDescription, "")
     }
 
 }
