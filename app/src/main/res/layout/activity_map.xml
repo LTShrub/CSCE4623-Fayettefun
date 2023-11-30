@@ -70,7 +70,7 @@
             app:srcCompat="@drawable/random_icon" />
 
         <ImageButton
-            android:id="@+id/another_feature"
+            android:id="@+id/help_button"
             style="@style/RoundButton"
             android:layout_width="70dp"
             android:layout_height="70dp"

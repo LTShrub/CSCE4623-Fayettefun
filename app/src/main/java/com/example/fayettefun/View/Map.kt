@@ -39,6 +39,7 @@ class Map : AppCompatActivity() {
     private lateinit var randomEventButton: ImageButton
     private lateinit var userProfileButton: ImageButton
     private lateinit var newEventButton: ImageButton
+    private lateinit var helpButton: ImageButton
 
 
 
@@ -65,6 +66,7 @@ class Map : AppCompatActivity() {
         randomEventButton = findViewById(R.id.random_event_button)
         userProfileButton = findViewById(R.id.user_profile_button)
         newEventButton = findViewById(R.id.new_event_button)
+        helpButton = findViewById(R.id.help_button)
 
         // OnClickListener for buttons
         centerCameraButton.setOnClickListener { // When pressed it will center the camera on the user
@@ -79,6 +81,10 @@ class Map : AppCompatActivity() {
         }
         newEventButton.setOnClickListener {
             val intent = Intent(this, CreateEvent::class.java) // It will take user to event creation activity
+            startActivity(intent)
+        }
+        helpButton.setOnClickListener {
+            val intent = Intent(this, Help::class.java)
             startActivity(intent)
         }
     }
