@@ -42,9 +42,8 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
         mMap = root.findViewById(R.id.map)
         userMarker = Marker(mMap) // Initializes user maker
         setupMapOptions() // Sets ups map options
-
         mapController = mMap.controller // Sets up map controller
-        mapController.setZoom(3.1) // Adjusts map zoom
+        mapController.setZoom(15.0) // Adjusts map zoom
         return root
     }
 
@@ -73,6 +72,7 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
         mMap.overlays.add(userMarker)
         Log.d("Marker", "Updating user marker location")
     }
+
     private fun addRotationOverlay() {
         val rotationGestureOverlay = RotationGestureOverlay(mMap)
         rotationGestureOverlay.isEnabled

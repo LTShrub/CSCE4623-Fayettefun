@@ -4,10 +4,12 @@ import android.Manifest
 import android.content.Intent
 import android.graphics.PorterDuff
 import android.location.Location
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.util.Log
+import android.view.WindowManager
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -47,6 +49,11 @@ class MapView : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_map)
 
+        // Allow for edge-to-edge display
+        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT) {
+            window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+        }
+
         // Load the configuration settings for the OSMDroid library
         Configuration.getInstance().load(this, PreferenceManager.getDefaultSharedPreferences(this))
 
@@ -57,6 +64,8 @@ class MapView : AppCompatActivity() {
         }
         locationProviderClient = LocationServices.getFusedLocationProviderClient(this)
         getLastLocation(this, locationProviderClient, locationUtilCallback)
+
+
 
         // Initializes buttons
         centerCameraButton = findViewById(R.id.center_camera_button)
