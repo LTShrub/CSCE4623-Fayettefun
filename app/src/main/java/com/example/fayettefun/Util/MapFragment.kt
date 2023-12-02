@@ -8,7 +8,9 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
+import com.example.fayettefun.Model.MapPoint
 import com.example.fayettefun.R
 import org.osmdroid.api.IMapController
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
@@ -119,6 +121,21 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
     fun updateCurrentLocation(location: Location) {
         mCurrentLocation = GeoPoint(location.latitude, location.longitude) // Transforms current location to geolocation
         addUserMarker()
+    }
+
+    fun addActiveEventMarkers(activeEvents: List<MapPoint>) {
+        for (event in activeEvents) {
+            val marker = Marker(mMap)
+            marker.position = GeoPoint(event.latitude, event.longitude)
+            marker.snippet = event.description  // Use any property as a snippet
+            marker.icon = ResourcesCompat.getDrawable(resources, R.drawable.temp_even_icon, null)
+
+            // Add marker to the map
+            mMap.overlays.add(marker)
+        }
+
+        // Force map redraw
+        mMap.invalidate()
     }
 
 }

@@ -11,12 +11,16 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import com.example.fayettefun.Model.MapPoint
 import com.example.fayettefun.R
+import com.example.fayettefun.ViewModel.CreateEventViewModel
 import java.util.Calendar
 import java.util.Locale
 
 class CreateEvent : AppCompatActivity() {
+
+    private lateinit var createEventViewModel: CreateEventViewModel
 
     // Instance variables
     private lateinit var nameEvent: EditText
@@ -30,6 +34,9 @@ class CreateEvent : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_event)
+
+        // Initialize ViewModel
+        createEventViewModel = ViewModelProvider(this).get(CreateEventViewModel::class.java)
 
         // Initialize components
         nameEvent = findViewById(R.id.event_name)
@@ -92,6 +99,7 @@ class CreateEvent : AppCompatActivity() {
         return if(!setName.isNullOrEmpty() && !setAddress.isNullOrEmpty() && !setTime.isNullOrEmpty() && !setDate.isNullOrEmpty() && !setDescription.isNullOrEmpty()){
             // Create MapPoint object to add it as a record to Firebase
             val newEvent = MapPoint(setLatitude, setLongitude, setName, setDate, setTime, setDescription, "")
+            createEventViewModel.addMapPointToDatabase(newEvent)
             toastMessage("Event Created!")
             true
         } else{

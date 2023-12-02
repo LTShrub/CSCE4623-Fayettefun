@@ -10,6 +10,7 @@ import android.util.Log
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.lifecycle.ViewModelProvider
 import com.example.fayettefun.R
 import com.example.fayettefun.Util.LocationUtilCallback
 import com.example.fayettefun.Util.OpenStreetMapFragment
@@ -18,14 +19,17 @@ import com.example.fayettefun.Util.createLocationRequest
 import com.example.fayettefun.Util.getLastLocation
 import com.example.fayettefun.Util.replaceFragmentInActivity
 import com.example.fayettefun.Util.stopLocationUpdates
+import com.example.fayettefun.ViewModel.MapViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationServices
+import com.google.firebase.FirebaseApp
 import org.osmdroid.config.Configuration
 
 class Map : AppCompatActivity() {
 
     private lateinit var mapsFragment: OpenStreetMapFragment // Instance variables of map fragment
+    private lateinit var mapViewModel: MapViewModel //create map viewmodel
 
     // Permission and location variables
     private var locationPermissionEnabled: Boolean = false
@@ -86,6 +90,13 @@ class Map : AppCompatActivity() {
         helpButton.setOnClickListener {
             val intent = Intent(this, Help::class.java)
             startActivity(intent)
+        }
+
+        mapViewModel = ViewModelProvider(this).get(MapViewModel::class.java)
+
+        mapViewModel.startMapPointsListener { mapPoints ->
+            // Update the map with the new map points
+            mapsFragment.addActiveEventMarkers(mapPoints)
         }
     }
 

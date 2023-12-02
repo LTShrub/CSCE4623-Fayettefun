@@ -1,17 +1,46 @@
 package com.example.fayettefun.Model
 
 //
-import com.google.firebase.database.FirebaseDatabase
-class FirebaseRepository {
-    private val database = FirebaseDatabase.getInstance()
-    private val addEventRef = database.getReference("active-events")
+import com.google.firebase.Firebase
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ListenerRegistration
 
-    //call to add a new event to the database
+class FirebaseRepository {
+    private val database = FirebaseFirestore.getInstance()
+    private val addEventRef = database.collection("active-events")
+
+
+    // Call to add a new event to the Firestore database
     fun addMapPoint(mapPoint: MapPoint) {
-        val key = addEventRef.push().key
-        key?.let {
-            addEventRef.child(it).setValue(mapPoint)
-        }
+        addEventRef.add(mapPoint)
+            .addOnSuccessListener { documentReference ->
+                // Handle success if needed
+                println("DocumentSnapshot added with ID: ${documentReference.id}")
+            }
+            .addOnFailureListener { e ->
+                // Handle errors if needed
+                println("Error adding document: $e")
+            }
     }
 
+    fun addMapPointsListener(listener: (List<MapPoint>) -> Unit): ListenerRegistration {
+        return addEventRef.addSnapshotListener { snapshot, exception ->
+            if (exception != null) {
+                // Handle the exception
+                return@addSnapshotListener
+            }
+
+            if (snapshot != null && !snapshot.isEmpty) {
+                val mapPoints = mutableListOf<MapPoint>()
+                for (document in snapshot.documents) {
+                    val mapPoint = document.toObject(MapPoint::class.java)
+                    mapPoint?.let {
+                        mapPoints.add(it)
+                    }
+                }
+
+                listener(mapPoints)
+            }
+        }
+    }
 }
