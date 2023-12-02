@@ -1,7 +1,5 @@
 package com.example.fayettefun.Model
 
-//
-import com.google.firebase.Firebase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
 
@@ -33,9 +31,14 @@ class FirebaseRepository {
             if (snapshot != null && !snapshot.isEmpty) {
                 val mapPoints = mutableListOf<MapPoint>()
                 for (document in snapshot.documents) {
-                    val mapPoint = document.toObject(MapPoint::class.java)
-                    mapPoint?.let {
-                        mapPoints.add(it)
+                    try {
+                        val mapPoint = document.toObject(MapPoint::class.java)
+                        mapPoint?.let {
+                            mapPoints.add(it)
+                        }
+                    } catch (e: Exception) {
+                        println("Error converting document to MapPoint: $e")
+                        println("Document data: ${document.data}")
                     }
                 }
 
