@@ -138,4 +138,19 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
         mMap.invalidate()
     }
 
+    fun addActiveEventMarkers(activeEvents: List<MapPoint>) {
+        for (event in activeEvents) {
+            val marker = Marker(mMap)
+            marker.position = GeoPoint(event.latitude, event.longitude)
+            marker.snippet = event.description  // Use any property as a snippet
+            marker.icon = ResourcesCompat.getDrawable(resources, R.drawable.temp_even_icon, null)
+
+            // Add marker to the map
+            mMap.overlays.add(marker)
+        }
+
+        // Force map redraw
+        mMap.invalidate()
+    }
+
 }
