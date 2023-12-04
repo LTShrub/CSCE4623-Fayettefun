@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.fayettefun.R
+import org.osmdroid.views.MapView
 
 class Profile : AppCompatActivity() {
 

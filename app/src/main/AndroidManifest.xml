@@ -30,7 +30,7 @@
             android:exported="false"
             android:parentActivityName=".View.Map" />
         <activity
-            android:name=".View.Map"
+            android:name=".View.Interests"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
