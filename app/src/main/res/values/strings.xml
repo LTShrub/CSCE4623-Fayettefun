@@ -1,6 +1,3 @@
 <resources>
-
-    <string name="football">Football</string>
-    <string name="bars">Bars</string>
-    <string name="beer" />
+    <string name="default_web_client_id">607797422921-3jpalod6rgmjtqr8t0fc79vpphtgmvf8.apps.googleusercontent.com</string>
 </resources>

@@ -60,10 +60,14 @@ dependencies {
 
     //OpenStreetMap Components
     implementation("org.osmdroid:osmdroid-android:6.1.14")
+
+    //Google Components
     implementation("com.google.android.gms:play-services-location:21.0.1")
     implementation("com.google.firebase:firebase-database:20.3.0")
     implementation("com.google.firebase:firebase-database-ktx:20.3.0")
     implementation("com.google.firebase:firebase-firestore:24.9.1")
+    implementation("com.google.firebase:firebase-auth:22.3.0")
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
 
     // Testing
     testImplementation("junit:junit:4.13.2")

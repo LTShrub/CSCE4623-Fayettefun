@@ -30,11 +30,13 @@
             android:exported="false"
             android:parentActivityName=".View.Map" />
         <activity
-            android:name=".View.Interests"
+            android:name=".View.Map"
+            android:exported="true" />
+        <activity
+            android:name=".View.LoginScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
