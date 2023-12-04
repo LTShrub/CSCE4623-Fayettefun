@@ -23,7 +23,6 @@ import com.example.fayettefun.ViewModel.MapViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationServices
-import com.google.firebase.FirebaseApp
 import org.osmdroid.config.Configuration
 
 class Map : AppCompatActivity() {
@@ -77,7 +76,13 @@ class Map : AppCompatActivity() {
             mapsFragment.centerLocation()
         }
         randomEventButton.setOnClickListener {  // It will take the user to a random local event
-            Log.d("Random Button", "Clicking")
+            mapViewModel.getRandomEvent { randomMapPoint ->
+                if (randomMapPoint != null) {
+                    mapsFragment.randomEvent(randomMapPoint) // Passes the random event to the map fragment to be used
+                } else {
+                    Log.d("Map", "Error with random map point")
+                }
+            }
         }
         userProfileButton.setOnClickListener {  // It will take the user to their profile
             val intent = Intent(this, Profile::class.java)

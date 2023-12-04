@@ -2,13 +2,10 @@ package com.example.fayettefun.Util
 
 import android.location.Location
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import com.example.fayettefun.Model.MapPoint
 import com.example.fayettefun.R
@@ -77,13 +74,6 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
         mMap.invalidate() // Force map redraw
     }
 
-    private fun addEventMarker() {
-        userMarker.position = mCurrentLocation // Updates marker position
-        userMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-        userMarker.icon = ResourcesCompat.getDrawable(resources, R.drawable.temp_even_icon, null) // Marker icon
-        mMap.overlays.add(userMarker) // Add the updated user marker
-    }
-
     private fun addRotationOverlay() {
         val rotationGestureOverlay = RotationGestureOverlay(mMap)
         rotationGestureOverlay.isEnabled
@@ -136,6 +126,14 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
 
         // Force map redraw
         mMap.invalidate()
+    }
+
+    fun randomEvent(randomMapPoint: MapPoint) {
+        val rLatitude = randomMapPoint.latitude // Random event latitude
+        val rLongitude = randomMapPoint.longitude // Random event longitude
+        val rLocation = GeoPoint(rLatitude, rLongitude) // Geolocation
+        mapController.setCenter(rLocation) // Sets the camera on the random event
+
     }
 
 }
