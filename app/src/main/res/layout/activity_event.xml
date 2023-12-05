@@ -52,7 +52,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3">
 
-        <EditText
+        <TextView
             android:id="@+id/editTextAddress"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -60,27 +60,31 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:hint="Address"
+            android:minHeight="48dp"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
+            android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
+        <TextView
             android:id="@+id/editTextDate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:hint="Date"
+            android:minHeight="48dp"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
-            android:hint="Date"
+            android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextAddress" />
 
-        <EditText
+        <TextView
             android:id="@+id/editTextTime"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -88,9 +92,11 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
+            android:hint="Time"
+            android:minHeight="48dp"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
-            android:hint="Time"
+            android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -104,11 +110,11 @@
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/oval_button_dark_blue"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/constraintLayout3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
@@ -116,11 +122,40 @@
             android:id="@+id/editTextDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="12dp"
+            android:textColorHint="@color/white"
             android:hint="Description"
+            android:padding="12dp"
             android:textColor="@color/white"
             android:textSize="18sp" />
     </androidx.core.widget.NestedScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/oval_button_dark_blue"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/scrollViewDescription"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Tags"
+            android:textColorHint="@color/white"
+            android:textSize="18sp"
+            android:padding="12dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -176,7 +211,7 @@
             app:layout_constraintBottom_toTopOf="@+id/textUsername"
             app:layout_constraintStart_toStartOf="@+id/textUsername" />
 
-        <EditText
+        <TextView
             android:id="@+id/editTextNumber"
             android:layout_width="110dp"
             android:layout_height="0dp"

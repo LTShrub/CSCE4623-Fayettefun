@@ -33,6 +33,11 @@
             android:name=".View.Map"
             android:exported="true" />
         <activity
+            android:name=".View.ViewEvent"
+            android:exported="false"
+            android:parentActivityName=".View.Map" />
+
+        <activity
             android:name=".View.LoginScreen"
             android:exported="true">
             <intent-filter>

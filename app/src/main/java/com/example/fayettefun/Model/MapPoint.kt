@@ -9,5 +9,7 @@ data class MapPoint(
     @get:PropertyName("event-date") var eventDate: String = "",
     @get:PropertyName("event-time") var eventTime: String = "",
     @get:PropertyName("description") var description: String = "",
-    @get:PropertyName("rsvp-users") var rsvpUser: String = ""
+    @get:PropertyName("address") var address: String = "",
+    @get:PropertyName("rsvp-users") var rsvpUser: String = "",
+    @get:PropertyName("tag") var tag: String = "",
 )

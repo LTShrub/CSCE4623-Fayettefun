@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
@@ -31,6 +32,12 @@ class CreateEvent : AppCompatActivity() {
     private lateinit var descriptionEvent: EditText
     private lateinit var createButton: Button
     private lateinit var geocoder: Geocoder
+    private lateinit var checkBar: CheckBox
+    private lateinit var checkNature: CheckBox
+    private lateinit var checkFood: CheckBox
+    private lateinit var checkHealth: CheckBox
+    private lateinit var checkParty: CheckBox
+    private lateinit var checkGreek: CheckBox
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -103,7 +110,7 @@ class CreateEvent : AppCompatActivity() {
         return if (setName.isNotEmpty() && setAddress.isNotEmpty() && setTime.isNotEmpty() && setDate.isNotEmpty() && setDescription.isNotEmpty()) {
             // Create MapPoint object to add it as a record to Firebase
             val eventId = generateEventId()  // Generate a unique event ID
-            val newEvent = MapPoint(eventId, setLatitude, setLongitude, setName, setDate, setTime, setDescription, "")
+            val newEvent = MapPoint(eventId, setLatitude, setLongitude, setName, setDate, setTime, setDescription,setAddress, "")
             createEventViewModel.addMapPointToDatabase(newEvent)
             toastMessage("Event Created!")
             true

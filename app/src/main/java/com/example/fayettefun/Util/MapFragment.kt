@@ -6,10 +6,8 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import com.example.fayettefun.Model.MapPoint
 import com.example.fayettefun.R
@@ -21,8 +19,7 @@ import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.CopyrightOverlay
 import org.osmdroid.views.overlay.Marker
 import org.osmdroid.views.overlay.gestures.RotationGestureOverlay
-import com.example.fayettefun.View.Event // Adjust the package path if necessary
-import java.util.UUID
+import com.example.fayettefun.View.ViewEvent // Adjust the package path if necessary
 
 
 class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
@@ -30,6 +27,7 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
     private lateinit var mMap: MapView
     private lateinit var userMarker: Marker
     private lateinit var mapController: IMapController
+    private val eventMarkers = mutableMapOf<String, MapPoint>()
 
     // Location variables
     private lateinit var mCurrentLocation: GeoPoint
@@ -119,8 +117,29 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
     }
 
     override fun onMarkerClick(marker: Marker?, mapView: MapView?): Boolean {
-        TODO("Not yet implemented")
+        marker?.let {
+            val eventDescription = eventMarkers[marker.id]?.description ?: "No description available"
+            val eventTitle = eventMarkers[marker.id]?.locationName ?: "No title available"
+            val eventLocation = eventMarkers[marker.id]?.address?: "No address available"
+            val eventTime = eventMarkers[marker.id]?.eventTime?: "No time available"
+            val eventDate = eventMarkers[marker.id]?.eventDate?: "No date available"
+            val eventID = eventMarkers[marker.id]?.id?: "No ID available"
+            val eventRSVP = eventMarkers[marker.id]?.rsvpUser?: "No RSVPs"
+            val intent = Intent(activity, ViewEvent::class.java).apply {
+                putExtra("EVENT_ID", eventID)
+                putExtra("EVENT_DESCRIPTION", eventDescription)
+                putExtra("EVENT_TITLE", eventTitle)
+                putExtra("EVENT_LOCATION",eventLocation)
+                putExtra("EVENT_TIME",eventTime)
+                putExtra("EVENT_DATE",eventDate)
+                putExtra("EVENT_RSVP",eventRSVP)
+            }
+            startActivity(intent)
+        }
+        return true
     }
+
+
 
     fun updateCurrentLocation(location: Location) {
         mCurrentLocation = GeoPoint(location.latitude, location.longitude) // Transforms current location to geolocation
@@ -131,11 +150,16 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
         for (event in activeEvents) {
             val marker = Marker(mMap)
             marker.position = GeoPoint(event.latitude, event.longitude)
-            marker.snippet = event.description  // Use any property as a snippet
             marker.icon = ResourcesCompat.getDrawable(resources, R.drawable.temp_even_icon, null)
+            marker.id = event.id
+
+            // Set this fragment as the click listener for the marker
+            marker.setOnMarkerClickListener(this)
 
             // Add marker to the map
             mMap.overlays.add(marker)
+
+            eventMarkers[marker.id] = event
         }
 
         // Force map redraw
