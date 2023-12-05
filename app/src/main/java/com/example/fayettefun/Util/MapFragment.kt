@@ -3,7 +3,6 @@ package com.example.fayettefun.Util
 import android.content.Intent
 import android.location.Location
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -70,20 +69,15 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
         addRotationOverlay()
 
     }
+
     private fun addUserMarker() {
         mMap.overlays.remove(userMarker) // Remove existing user marker
         userMarker.position = mCurrentLocation // Updates marker position
         userMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-        userMarker.icon = ResourcesCompat.getDrawable(resources, R.drawable.user_pin, null) // Marker icon
+        userMarker.icon =
+            ResourcesCompat.getDrawable(resources, R.drawable.user_pin, null) // Marker icon
         mMap.overlays.add(userMarker) // Add the updated user marker
         mMap.invalidate() // Force map redraw
-    }
-
-    private fun addEventMarker() {
-        userMarker.position = mCurrentLocation // Updates marker position
-        userMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-        userMarker.icon = ResourcesCompat.getDrawable(resources, R.drawable.temp_even_icon, null) // Marker icon
-        mMap.overlays.add(userMarker) // Add the updated user marker
     }
 
     private fun addRotationOverlay() {
@@ -118,21 +112,22 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
 
     override fun onMarkerClick(marker: Marker?, mapView: MapView?): Boolean {
         marker?.let {
-            val eventDescription = eventMarkers[marker.id]?.description ?: "No description available"
+            val eventDescription =
+                eventMarkers[marker.id]?.description ?: "No description available"
             val eventTitle = eventMarkers[marker.id]?.locationName ?: "No title available"
-            val eventLocation = eventMarkers[marker.id]?.address?: "No address available"
-            val eventTime = eventMarkers[marker.id]?.eventTime?: "No time available"
-            val eventDate = eventMarkers[marker.id]?.eventDate?: "No date available"
-            val eventID = eventMarkers[marker.id]?.id?: "No ID available"
-            val eventRSVP = eventMarkers[marker.id]?.rsvpUser?: "No RSVPs"
+            val eventLocation = eventMarkers[marker.id]?.address ?: "No address available"
+            val eventTime = eventMarkers[marker.id]?.eventTime ?: "No time available"
+            val eventDate = eventMarkers[marker.id]?.eventDate ?: "No date available"
+            val eventID = eventMarkers[marker.id]?.id ?: "No ID available"
+            val eventRSVP = eventMarkers[marker.id]?.rsvpUser ?: "No RSVPs"
             val intent = Intent(activity, ViewEvent::class.java).apply {
                 putExtra("EVENT_ID", eventID)
                 putExtra("EVENT_DESCRIPTION", eventDescription)
                 putExtra("EVENT_TITLE", eventTitle)
-                putExtra("EVENT_LOCATION",eventLocation)
-                putExtra("EVENT_TIME",eventTime)
-                putExtra("EVENT_DATE",eventDate)
-                putExtra("EVENT_RSVP",eventRSVP)
+                putExtra("EVENT_LOCATION", eventLocation)
+                putExtra("EVENT_TIME", eventTime)
+                putExtra("EVENT_DATE", eventDate)
+                putExtra("EVENT_RSVP", eventRSVP)
             }
             startActivity(intent)
         }
@@ -140,9 +135,11 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
     }
 
 
-
     fun updateCurrentLocation(location: Location) {
-        mCurrentLocation = GeoPoint(location.latitude, location.longitude) // Transforms current location to geolocation
+        mCurrentLocation = GeoPoint(
+            location.latitude,
+            location.longitude
+        ) // Transforms current location to geolocation
         addUserMarker()
     }
 
@@ -165,4 +162,13 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
         // Force map redraw
         mMap.invalidate()
     }
+
+    fun randomEvent(randomMapPoint: MapPoint) {
+        val rLatitude = randomMapPoint.latitude // Random event latitude
+        val rLongitude = randomMapPoint.longitude // Random event longitude
+        val rLocation = GeoPoint(rLatitude, rLongitude) // Geolocation
+        mapController.setCenter(rLocation) // Sets the camera on the random event
+
+    }
 }
+

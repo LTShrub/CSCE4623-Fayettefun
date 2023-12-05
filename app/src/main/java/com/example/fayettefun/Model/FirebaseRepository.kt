@@ -2,6 +2,7 @@ package com.example.fayettefun.Model
 
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
+import java.util.Random
 
 class FirebaseRepository {
     private val database = FirebaseFirestore.getInstance()
@@ -46,4 +47,29 @@ class FirebaseRepository {
             }
         }
     }
+
+    fun getRandomEvent(onSuccess: (MapPoint?) -> Unit) {
+        addEventRef.get() // Query that gets the collection of events
+            .addOnSuccessListener { documentReference -> // Handles the result of the query, documentReference represent the result of the query
+                if (!documentReference.isEmpty) {
+                    val documents = documentReference.documents // list in order of the query
+                    val randomIndex = Random().nextInt(documents.size) // Selects a random number with the size of the collection
+                    val randomDocument = documents[randomIndex] // Gets the random event using the index created
+
+                    try {
+                        val mapPoint = randomDocument.toObject(MapPoint::class.java)
+                        onSuccess(mapPoint)
+                        println("Success getting the random event")
+                    } catch (e: Exception) {
+                        println("Error getting the random event")
+                    }
+                } else {
+                    println("Error: Database is empty. Cannot get a random event")
+                }
+            }
+            .addOnFailureListener {
+                println("Error getting random event Database is empty")
+            }
+    }
+
 }
