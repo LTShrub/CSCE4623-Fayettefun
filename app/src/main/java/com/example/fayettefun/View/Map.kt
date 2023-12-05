@@ -82,6 +82,10 @@ class Map : AppCompatActivity() {
                 } else {
                     Log.d("Map", "Error with random map point")
                 }
+                // Open the event after a few seconds
+                val intent = Intent(this, ViewEvent::class.java)
+                intent.putExtra("Random Event", randomMapPoint)
+                startActivity(intent)
             }
         }
         userProfileButton.setOnClickListener {  // It will take the user to their profile
