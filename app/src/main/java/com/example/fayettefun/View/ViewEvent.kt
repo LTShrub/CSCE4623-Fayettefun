@@ -56,57 +56,53 @@ class ViewEvent : AppCompatActivity() {
 
         // WHY IS THIS NOT WORKING? THE DESCRIPTION IS NOT BEING PASSES TO THE SCREEN
         if (data != null) { // Handles intent from random button in map activity
-            if (data != null) {
-                Log.d("Intent", "Data: $data")
-                if (data.containsKey("RANDOM_EVENT_KEY")) {
-                    val event = data.getParcelable<MapPoint>("RANDOM_EVENT_KEY")
-                    Log.d("Intent", "Received Event: $event")
-                    val eventDescription = event?.description
-                    descriptionTextView.text = eventDescription
+            if (data.containsKey("RANDOM_EVENT_KEY")) {
+                val event = data.getParcelable<MapPoint>("RANDOM_EVENT_KEY")
+                Log.d("Intent", "Received Event: $event")
+                val eventDescription = event?.description
+                descriptionTextView.text = eventDescription
 
-                    val eventTitle = event?.locationName
-                    titleTextView.text = eventTitle
+                val eventTitle = event?.locationName
+                titleTextView.text = eventTitle
 
-                    val eventLocation = event?.locationName
-                    addressEditText.text = eventLocation
+                val eventLocation = event?.locationName
+                addressEditText.text = eventLocation
 
-                    val eventTime = event?.eventTime
-                    timeEditText.text = eventTime
+                val eventTime = event?.eventTime
+                timeEditText.text = eventTime
 
-                    val eventDate = event?.eventDate
-                    dateEditText.text = eventDate
+                val eventDate = event?.eventDate
+                dateEditText.text = eventDate
 
-                    val rsvpNum = event?.rsvpUser
-                    numberEditText.text = rsvpNum
-                }
+                val rsvpNum = event?.rsvpUser
+                numberEditText.text = rsvpNum
             }
+            else{ // Handles intent from clicking an event in map fragment
+                val eventDescription = intent.getStringExtra("EVENT_DESCRIPTION")
+                descriptionTextView.text = eventDescription
 
+                // Get the event title
+                val eventTitle = intent.getStringExtra("EVENT_TITLE")
+                titleTextView.text = eventTitle
 
+                //Get the event location
+                val eventLocation = intent.getStringExtra("EVENT_LOCATION")
+                addressEditText.text = eventLocation
+
+                //get the event time
+                val eventTime = intent.getStringExtra("EVENT_TIME")
+                timeEditText.text = eventTime
+
+                //get the event date
+                val eventDate = intent.getStringExtra("EVENT_DATE")
+                dateEditText.text = eventDate
+
+                //get total rsvp
+                val rsvpNum = intent.getStringExtra("EVENT_RSVP")
+                numberEditText.text = rsvpNum
+            }
         }
-        else{ // Handles intent from clicking an event in map fragment
-            val eventDescription = intent.getStringExtra("EVENT_DESCRIPTION")
-            descriptionTextView.text = eventDescription
 
-            // Get the event title
-            val eventTitle = intent.getStringExtra("EVENT_TITLE")
-            titleTextView.text = eventTitle
-
-            //Get the event location
-            val eventLocation = intent.getStringExtra("EVENT_LOCATION")
-            addressEditText.text = eventLocation
-
-            //get the event time
-            val eventTime = intent.getStringExtra("EVENT_TIME")
-            timeEditText.text = eventTime
-
-            //get the event date
-            val eventDate = intent.getStringExtra("EVENT_DATE")
-            dateEditText.text = eventDate
-
-            //get total rsvp
-            val rsvpNum = intent.getStringExtra("EVENT_RSVP")
-            numberEditText.text = rsvpNum
-        }
         // Button
         rsvpFab.setOnClickListener {
             val eventId = "EVENT_ID"
