@@ -54,7 +54,6 @@ class ViewEvent : AppCompatActivity() {
         val intent = intent
         val data = intent.extras
 
-        // WHY IS THIS NOT WORKING? THE DESCRIPTION IS NOT BEING PASSES TO THE SCREEN
         if (data != null) { // Handles intent from random button in map activity
             if (data.containsKey("RANDOM_EVENT_KEY")) {
                 val event = data.getParcelable<MapPoint>("RANDOM_EVENT_KEY")
