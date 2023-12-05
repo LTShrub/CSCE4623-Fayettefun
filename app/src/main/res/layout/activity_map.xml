@@ -57,7 +57,7 @@
             android:contentDescription="New Event"
             android:padding="0dp"
             android:layout_gravity="center_vertical"
-            app:srcCompat="@drawable/new_event_icon" />
+            app:srcCompat="@drawable/add_event_icon" />
 
         <ImageButton
             android:id="@+id/random_event_button"
@@ -67,7 +67,7 @@
             android:layout_marginBottom="20dp"
             android:contentDescription="Random Event"
             android:padding="0dp"
-            app:srcCompat="@drawable/random_icon" />
+            app:srcCompat="@drawable/random_event_icon" />
 
         <ImageButton
             android:id="@+id/help_button"
@@ -78,7 +78,7 @@
             android:contentDescription="Something else"
             android:padding="0dp"
             android:layout_gravity="center"
-            app:srcCompat="@drawable/help_map_icon" />
+            app:srcCompat="@drawable/help_icon" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
