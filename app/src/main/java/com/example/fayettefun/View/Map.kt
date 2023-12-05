@@ -82,9 +82,9 @@ class Map : AppCompatActivity() {
                 } else {
                     Log.d("Map", "Error with random map point")
                 }
-                // Open the event after a few seconds
+                // Opens the random event
                 val intent = Intent(this, ViewEvent::class.java)
-                intent.putExtra("Random Event", randomMapPoint)
+                intent.putExtra("RANDOM_EVENT_KEY", randomMapPoint)
                 startActivity(intent)
             }
         }

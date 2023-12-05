@@ -6,6 +6,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.fayettefun.Model.MapPoint
 import com.example.fayettefun.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.DataSnapshot
@@ -49,30 +50,64 @@ class ViewEvent : AppCompatActivity() {
         numberEditText = findViewById(R.id.editTextNumber)
         descriptionTextView = findViewById(R.id.editTextDescription)
 
-        // Get the event description
-        val eventDescription = intent.getStringExtra("EVENT_DESCRIPTION")
-        descriptionTextView.text = eventDescription
+        // Handles the intent objects
+        val intent = intent
+        val data = intent.extras
 
-        // Get the event title
-        val eventTitle = intent.getStringExtra("EVENT_TITLE")
-        titleTextView.text = eventTitle
+        // WHY IS THIS NOT WORKING? THE DESCRIPTION IS NOT BEING PASSES TO THE SCREEN
+        if (data != null) { // Handles intent from random button in map activity
+            if (data != null) {
+                Log.d("Intent", "Data: $data")
+                if (data.containsKey("RANDOM_EVENT_KEY")) {
+                    val event = data.getParcelable<MapPoint>("RANDOM_EVENT_KEY")
+                    Log.d("Intent", "Received Event: $event")
+                    val eventDescription = event?.description
+                    descriptionTextView.text = eventDescription
 
-        //Get the event location
-        val eventLocation = intent.getStringExtra("EVENT_LOCATION")
-        addressEditText.text = eventLocation
+                    val eventTitle = event?.locationName
+                    titleTextView.text = eventTitle
 
-        //get the event time
-        val eventTime = intent.getStringExtra("EVENT_TIME")
-        timeEditText.text = eventTime
+                    val eventLocation = event?.locationName
+                    addressEditText.text = eventLocation
 
-        //get the event date
-        val eventDate = intent.getStringExtra("EVENT_DATE")
-        dateEditText.text = eventDate
+                    val eventTime = event?.eventTime
+                    timeEditText.text = eventTime
 
-        //get total rsvp
-        val rsvpNum = intent.getStringExtra("EVENT_RSVP")
-        numberEditText.text = rsvpNum
+                    val eventDate = event?.eventDate
+                    dateEditText.text = eventDate
 
+                    val rsvpNum = event?.rsvpUser
+                    numberEditText.text = rsvpNum
+                }
+            }
+
+
+        }
+        else{ // Handles intent from clicking an event in map fragment
+            val eventDescription = intent.getStringExtra("EVENT_DESCRIPTION")
+            descriptionTextView.text = eventDescription
+
+            // Get the event title
+            val eventTitle = intent.getStringExtra("EVENT_TITLE")
+            titleTextView.text = eventTitle
+
+            //Get the event location
+            val eventLocation = intent.getStringExtra("EVENT_LOCATION")
+            addressEditText.text = eventLocation
+
+            //get the event time
+            val eventTime = intent.getStringExtra("EVENT_TIME")
+            timeEditText.text = eventTime
+
+            //get the event date
+            val eventDate = intent.getStringExtra("EVENT_DATE")
+            dateEditText.text = eventDate
+
+            //get total rsvp
+            val rsvpNum = intent.getStringExtra("EVENT_RSVP")
+            numberEditText.text = rsvpNum
+        }
+        // Button
         rsvpFab.setOnClickListener {
             val eventId = "EVENT_ID"
             incrementRsvpCount(eventId) //Call increment function
