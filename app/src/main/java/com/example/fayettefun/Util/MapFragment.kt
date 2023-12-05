@@ -1,5 +1,6 @@
 package com.example.fayettefun.Util
 
+import android.content.Intent
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
@@ -20,6 +21,9 @@ import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.CopyrightOverlay
 import org.osmdroid.views.overlay.Marker
 import org.osmdroid.views.overlay.gestures.RotationGestureOverlay
+import com.example.fayettefun.View.Event // Adjust the package path if necessary
+import java.util.UUID
+
 
 class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
 

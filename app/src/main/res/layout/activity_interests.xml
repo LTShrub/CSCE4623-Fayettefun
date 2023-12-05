@@ -13,7 +13,7 @@
         android:background="@drawable/gradient_background">
 
         <ImageButton
-            android:id="@+id/imageButton1"
+            android:id="@+id/barButton"
             android:layout_width="169dp"
             android:layout_height="161dp"
             android:layout_marginStart="4dp"
@@ -33,9 +33,9 @@
         android:textAlignment="center"
         android:textSize="34sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton1"
-        app:layout_constraintStart_toStartOf="@+id/imageButton1"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton1" />
+        app:layout_constraintEnd_toEndOf="@+id/barButton"
+        app:layout_constraintStart_toStartOf="@+id/barButton"
+        app:layout_constraintTop_toBottomOf="@+id/barButton" />
 
     <TextView
         android:id="@+id/textView4"
@@ -45,9 +45,9 @@
         android:textAlignment="center"
         android:textSize="34sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton6"
-        app:layout_constraintStart_toStartOf="@+id/imageButton6"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton6" />
+        app:layout_constraintEnd_toEndOf="@+id/foodButton"
+        app:layout_constraintStart_toStartOf="@+id/foodButton"
+        app:layout_constraintTop_toBottomOf="@+id/foodButton" />
 
     <TextView
         android:id="@+id/textView5"
@@ -57,9 +57,9 @@
         android:textAlignment="center"
         android:textSize="34sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton7"
-        app:layout_constraintStart_toStartOf="@+id/imageButton7"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton7" />
+        app:layout_constraintEnd_toEndOf="@+id/fitnessButton"
+        app:layout_constraintStart_toStartOf="@+id/fitnessButton"
+        app:layout_constraintTop_toBottomOf="@+id/fitnessButton" />
 
     <TextView
         android:id="@+id/textView6"
@@ -69,9 +69,9 @@
         android:textAlignment="center"
         android:textSize="34sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton8"
-        app:layout_constraintStart_toStartOf="@+id/imageButton8"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton8" />
+        app:layout_constraintEnd_toEndOf="@+id/partyButton"
+        app:layout_constraintStart_toStartOf="@+id/partyButton"
+        app:layout_constraintTop_toBottomOf="@+id/partyButton" />
 
     <TextView
         android:id="@+id/textView7"
@@ -81,12 +81,12 @@
         android:textAlignment="center"
         android:textSize="34sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton9"
-        app:layout_constraintStart_toStartOf="@+id/imageButton9"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton9" />
+        app:layout_constraintEnd_toEndOf="@+id/greekButton"
+        app:layout_constraintStart_toStartOf="@+id/greekButton"
+        app:layout_constraintTop_toBottomOf="@+id/greekButton" />
 
         <ImageButton
-            android:id="@+id/imageButton2"
+            android:id="@+id/natureButton"
             android:layout_width="169dp"
             android:layout_height="161dp"
             android:layout_marginTop="16dp"
@@ -106,56 +106,56 @@
         android:textAlignment="center"
         android:textSize="34sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton2"
-        app:layout_constraintStart_toStartOf="@+id/imageButton2"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton2" />
+        app:layout_constraintEnd_toEndOf="@+id/natureButton"
+        app:layout_constraintStart_toStartOf="@+id/natureButton"
+        app:layout_constraintTop_toBottomOf="@+id/natureButton" />
 
         <ImageButton
-            android:id="@+id/imageButton6"
+            android:id="@+id/foodButton"
             android:layout_width="0dp"
             android:layout_height="161dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/oval_button_white"
             android:scaleType="fitCenter"
-            app:layout_constraintEnd_toEndOf="@+id/imageButton1"
-            app:layout_constraintStart_toStartOf="@+id/imageButton1"
+            app:layout_constraintEnd_toEndOf="@+id/barButton"
+            app:layout_constraintStart_toStartOf="@+id/barButton"
             app:layout_constraintTop_toBottomOf="@+id/textView1"
             app:srcCompat="@drawable/eat" />
 
     <ImageButton
-        android:id="@+id/imageButton7"
+        android:id="@+id/fitnessButton"
         android:layout_width="0dp"
         android:layout_height="161dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton2"
-        app:layout_constraintStart_toStartOf="@+id/imageButton2"
+        app:layout_constraintEnd_toEndOf="@+id/natureButton"
+        app:layout_constraintStart_toStartOf="@+id/natureButton"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
         android:background="@drawable/oval_button_white"
         app:srcCompat="@drawable/fitness" />
 
     <ImageButton
-        android:id="@+id/imageButton8"
+        android:id="@+id/partyButton"
         android:layout_width="0dp"
         android:layout_height="161dp"
         android:layout_marginTop="16dp"
         android:scaleType="fitCenter"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton6"
+        app:layout_constraintEnd_toEndOf="@+id/foodButton"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/imageButton6"
+        app:layout_constraintStart_toStartOf="@+id/foodButton"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
         android:background="@drawable/oval_button_white"
         app:srcCompat="@drawable/party" />
 
     <ImageButton
-        android:id="@+id/imageButton9"
+        android:id="@+id/greekButton"
         android:layout_width="0dp"
         android:layout_height="161dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/oval_button_white"
         android:scaleType="fitCenter"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton7"
+        app:layout_constraintEnd_toEndOf="@+id/fitnessButton"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/imageButton7"
+        app:layout_constraintStart_toStartOf="@+id/fitnessButton"
         app:layout_constraintTop_toBottomOf="@+id/textView5"
         app:srcCompat="@drawable/omega" />
 

@@ -17,6 +17,7 @@ import com.example.fayettefun.R
 import com.example.fayettefun.ViewModel.CreateEventViewModel
 import java.util.Calendar
 import java.util.Locale
+import java.util.UUID
 
 class CreateEvent : AppCompatActivity() {
 
@@ -81,7 +82,7 @@ class CreateEvent : AppCompatActivity() {
     }
 
     // This method will get the address entered by the user and will transform it to a geolocation 
-    private fun createEvent(): Boolean{
+    private fun createEvent(): Boolean {
         val setName = nameEvent.text.toString()
         val setAddress = addressEvent.text.toString()
         val setTime = timeEvent.text.toString()
@@ -91,23 +92,32 @@ class CreateEvent : AppCompatActivity() {
         var setLongitude = 0.0
 
         // Gets the address entered by the user and will get latitude and longitude from it
-        if(!setAddress.isNullOrEmpty()){
-            val coordinates = geocoder.getFromLocationName(addressEvent.text.toString(), 1)
-            setLatitude = coordinates?.get(0)?.latitude!!
-            setLongitude = coordinates?.get(0)?.longitude!!
+        if (setAddress.isNotEmpty()) {
+            val coordinates = geocoder.getFromLocationName(setAddress, 1)
+            if (coordinates != null && coordinates.isNotEmpty()) {
+                setLatitude = coordinates[0].latitude
+                setLongitude = coordinates[0].longitude
+            }
         }
-        return if(!setName.isNullOrEmpty() && !setAddress.isNullOrEmpty() && !setTime.isNullOrEmpty() && !setDate.isNullOrEmpty() && !setDescription.isNullOrEmpty()){
+
+        return if (setName.isNotEmpty() && setAddress.isNotEmpty() && setTime.isNotEmpty() && setDate.isNotEmpty() && setDescription.isNotEmpty()) {
             // Create MapPoint object to add it as a record to Firebase
-            val newEvent = MapPoint(setLatitude, setLongitude, setName, setDate, setTime, setDescription, "")
+            val eventId = generateEventId()  // Generate a unique event ID
+            val newEvent = MapPoint(eventId, setLatitude, setLongitude, setName, setDate, setTime, setDescription, "")
             createEventViewModel.addMapPointToDatabase(newEvent)
             toastMessage("Event Created!")
             true
-        } else{
+        } else {
             toastMessage("Enter all fields to create event")
             false
         }
-
     }
+
+    // Function to generate a unique UUID
+    private fun generateEventId(): String {
+        return UUID.randomUUID().toString()
+    }
+
 
     private fun toastMessage(message: String){ // Used to display messages to the user
         val duration = Toast.LENGTH_SHORT

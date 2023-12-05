@@ -19,17 +19,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9"
+        app:layout_constraintTop_toBottomOf="@+id/textTile"
         app:srcCompat="@drawable/testimage" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/textTile"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="Title"
+        android:hint="Title"
         android:textAlignment="center"
         android:textSize="34sp"
         android:textStyle="bold"
@@ -113,11 +113,11 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
         <TextView
-            android:id="@+id/textViewDescription"
+            android:id="@+id/editTextDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="12dp"
-            android:text="Description"
+            android:hint="Description"
             android:textColor="@color/white"
             android:textSize="18sp" />
     </androidx.core.widget.NestedScrollView>
@@ -132,7 +132,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton"
+            android:id="@+id/rsvpFab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|top"
@@ -143,7 +143,7 @@
             app:srcCompat="@drawable/like" />
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/profilePicture"
             android:layout_width="56dp"
             android:layout_height="56dp"
             android:layout_gravity="bottom|top|right"
@@ -154,17 +154,17 @@
             app:srcCompat="@drawable/picture_holder" />
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/textUsername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|top|right"
             android:layout_marginEnd="16dp"
-            android:text="Username"
+            android:hint="Username"
             android:textSize="25dp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView4"
-            app:layout_constraintEnd_toStartOf="@+id/imageView4"
-            app:layout_constraintTop_toTopOf="@+id/imageView4" />
+            app:layout_constraintBottom_toBottomOf="@+id/profilePicture"
+            app:layout_constraintEnd_toStartOf="@+id/profilePicture"
+            app:layout_constraintTop_toTopOf="@+id/profilePicture" />
 
         <TextView
             android:id="@+id/textView12"
@@ -173,8 +173,8 @@
             android:layout_gravity="bottom|top|right"
             android:text="Posted By:"
             android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/textView11"
-            app:layout_constraintStart_toStartOf="@+id/textView11" />
+            app:layout_constraintBottom_toTopOf="@+id/textUsername"
+            app:layout_constraintStart_toStartOf="@+id/textUsername" />
 
         <EditText
             android:id="@+id/editTextNumber"
@@ -183,9 +183,9 @@
             android:ems="10"
             android:inputType="number"
             android:textStyle="bold|italic"
-            app:layout_constraintBottom_toBottomOf="@+id/floatingActionButton"
-            app:layout_constraintStart_toEndOf="@+id/floatingActionButton"
-            app:layout_constraintTop_toTopOf="@+id/floatingActionButton" />
+            app:layout_constraintBottom_toBottomOf="@+id/rsvpFab"
+            app:layout_constraintStart_toEndOf="@+id/rsvpFab"
+            app:layout_constraintTop_toTopOf="@+id/rsvpFab" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
