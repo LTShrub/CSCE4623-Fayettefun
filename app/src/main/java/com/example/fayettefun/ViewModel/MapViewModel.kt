@@ -10,7 +10,7 @@ class MapViewModel : ViewModel(){
         firebaseRepository.addMapPointsListener(listener)
     }
 
-    fun getRandomEvent(point: (MapPoint?) -> Unit) {
+    fun getRandomEvent(point: (MapPoint?) -> Unit) { // Gets the random event from the database
         firebaseRepository.getRandomEvent { randomMapPoint ->
             point(randomMapPoint)
         }

@@ -97,7 +97,7 @@ class Map : AppCompatActivity() {
             startActivity(intent)
         }
 
-        mapViewModel = ViewModelProvider(this).get(MapViewModel::class.java)
+        mapViewModel = ViewModelProvider(this)[MapViewModel::class.java]
 
         mapViewModel.startMapPointsListener { mapPoints ->
             // Update the map with the new map points
