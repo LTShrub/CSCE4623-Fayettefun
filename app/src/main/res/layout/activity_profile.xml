@@ -32,46 +32,19 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp">
         </TextView>
-
-        <TextView
-            android:id="@+id/profile_bio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Argentine football prodigy, rose from humble beginnings to become a record-breaking Barcelona legend."
-            android:textSize="15sp"
-            android:textColor="@color/white"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp">
-        </TextView>
-
     </LinearLayout>
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/profile_bio"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="My Registrations"
-        android:textAlignment="center"
-        android:textColor="@color/charcoal"
-        style="@style/OvalButtons">
-    </Button>
+        android:text="Argentine football prodigy, rose from humble beginnings to become a record-breaking Barcelona legend."
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="20dp">
+    </TextView>
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="Created Events"
-        android:textAlignment="center"
-        android:textColor="@color/charcoal"
-        style="@style/OvalButtons">
-    </Button>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/display_events"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 
 
 </LinearLayout>
