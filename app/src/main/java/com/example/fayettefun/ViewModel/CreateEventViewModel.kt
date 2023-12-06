@@ -10,4 +10,11 @@ class CreateEventViewModel : ViewModel() {
     fun addMapPointToDatabase(mapPoint: MapPoint) {
         firebaseRepository.addMapPoint(mapPoint)
     }
+
+    fun getCurrentUserId(): String? {
+        return firebaseRepository.getCurrentUserId()
+    }
+    fun getCreatorName(creatorUid: String, onSuccess: (String) -> Unit, onFailure: () -> Unit) {
+        firebaseRepository.getUserName(creatorUid, onSuccess, onFailure)
+    }
 }

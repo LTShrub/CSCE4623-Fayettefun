@@ -91,6 +91,8 @@ class CreateEvent : AppCompatActivity() {
     // This method will get the address entered by the user and will transform it to a geolocation 
     private fun createEvent(): Boolean {
         val setName = nameEvent.text.toString()
+        val setCreatorId = createEventViewModel.getCurrentUserId() ?: ""
+        val setCreatorName = getCreatorName() ?: ""
         val setAddress = addressEvent.text.toString()
         val setTime = timeEvent.text.toString()
         val setDate = dateEvent.text.toString()
@@ -110,8 +112,11 @@ class CreateEvent : AppCompatActivity() {
         return if (setName.isNotEmpty() && setAddress.isNotEmpty() && setTime.isNotEmpty() && setDate.isNotEmpty() && setDescription.isNotEmpty()) {
             // Create MapPoint object to add it as a record to Firebase
             val eventId = generateEventId()  // Generate a unique event ID
-            val newEvent = MapPoint(eventId, setLatitude, setLongitude, setName, setDate, setTime, setDescription,setAddress, "")
-            createEventViewModel.addMapPointToDatabase(newEvent)
+            val newEvent = MapPoint(eventId, setCreatorId, setCreatorName, setLatitude, setLongitude, setName, setDate, setTime, setDescription,setAddress, "")
+
+            if (newEvent != null) {
+                createEventViewModel.addMapPointToDatabase(newEvent)
+            }
             toastMessage("Event Created!")
             true
         } else {
@@ -130,6 +135,26 @@ class CreateEvent : AppCompatActivity() {
         val duration = Toast.LENGTH_SHORT
         val toast = Toast.makeText(this, message, duration)
         toast.show()
+    }
+
+    private fun getCreatorName(): String? {
+        val currentUserId = createEventViewModel.getCurrentUserId()
+        return if (currentUserId != null) {
+            var creatorName: String? = null
+            createEventViewModel.getCreatorName(
+                currentUserId,
+                onSuccess = { name ->
+                    creatorName = name
+                },
+                onFailure = {
+                    Log.w("NewEventActivity", "Failed to fetch creator's name.")
+                }
+            )
+            creatorName
+        } else {
+            Log.w("NewEventActivity", "No user signed in.")
+            null
+        }
     }
 
 }
