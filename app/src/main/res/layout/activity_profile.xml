@@ -26,7 +26,7 @@
 
     <LinearLayout
         android:layout_width="350dp"
-        android:layout_height="400dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="-50dp"
         android:background="@drawable/user_profile_box"
@@ -41,27 +41,38 @@
             android:layout_gravity="center_horizontal">
         </ImageView>
 
-        <TextView
-            android:id="@+id/profile_name"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/editTextName"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Lionel Andres Messi"
-            android:textSize="30sp"
-            android:textColor="@color/charcoal"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp">
-        </TextView>
+            android:hint="Enter your name"
+            android:textSize="18sp"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal">
+        </EditText>
 
-        <TextView
-            android:id="@+id/profile_bio"
+        <EditText
+            android:id="@+id/editTextBio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your bio"
+            android:textSize="15sp"
+            android:padding="10dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp">
+        </EditText>
+
+        <Button
+            android:id="@+id/buttonSave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Argentine football prodigy, rose from humble beginnings to become a record-breaking Barcelona legend."
-            android:textSize="15sp"
-            android:textColor="@color/charcoal"
+            android:text="Save"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="20dp">
-        </TextView>
+            android:layout_marginTop="10dp"
+            android:background="@color/blue"
+            android:textColor="@android:color/black">
+        </Button>
     </LinearLayout>
 
 

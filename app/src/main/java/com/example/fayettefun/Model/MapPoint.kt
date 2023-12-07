@@ -6,6 +6,8 @@ import com.google.firebase.database.PropertyName
 
 data class MapPoint(
     @get:PropertyName("id") var id: String = "",
+    @get:PropertyName("creator") var creator: String = "",
+    @get:PropertyName("creator-name") var creatorName: String = "",
     @get:PropertyName("latitude") var latitude: Double = 0.0,
     @get:PropertyName("longitude") var longitude: Double = 0.0,
     @get:PropertyName("location-name") var locationName: String = "",
@@ -18,6 +20,8 @@ data class MapPoint(
 ) : Parcelable { // Will make he MapPoint objects be parcelable so they can be send through intents
 
     constructor(parcel: Parcel) : this(
+        parcel.readString() ?: "",
+        parcel.readString() ?: "",
         parcel.readString() ?: "",
         parcel.readDouble(),
         parcel.readDouble(),
@@ -32,6 +36,8 @@ data class MapPoint(
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(id)
+        parcel.writeString(creator)
+        parcel.writeString(creatorName)
         parcel.writeDouble(latitude)
         parcel.writeDouble(longitude)
         parcel.writeString(locationName)

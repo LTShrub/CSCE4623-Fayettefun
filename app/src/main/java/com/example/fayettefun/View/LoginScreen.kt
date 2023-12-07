@@ -6,7 +6,11 @@ import android.widget.Button
 import android.widget.ImageButton
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import com.example.fayettefun.Model.FirebaseRepository
 import com.example.fayettefun.R
+import com.example.fayettefun.ViewModel.LoginViewModel
+import com.example.fayettefun.ViewModel.LoginViewModelFactory
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -21,6 +25,7 @@ class LoginScreen : AppCompatActivity() {
     private lateinit var buttonSignUP: Button
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
+    private lateinit var loginViewModel: LoginViewModel
 
     private val signInLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == RESULT_OK) {
@@ -32,7 +37,8 @@ class LoginScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        auth = FirebaseAuth.getInstance()
+        val firebaseRepository = FirebaseRepository()
+        loginViewModel = ViewModelProvider(this, LoginViewModelFactory(firebaseRepository))[LoginViewModel::class.java]
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
@@ -49,8 +55,6 @@ class LoginScreen : AppCompatActivity() {
         buttonGoogle = findViewById(R.id.buttonGoogle)
         buttonGoogle.setOnClickListener {
             signInWithGoogle()
-
-
         }
 
     }
@@ -66,27 +70,16 @@ class LoginScreen : AppCompatActivity() {
             // Google Sign-In was successful, authenticate with Firebase
             val account = task.getResult(ApiException::class.java)!!
             firebaseAuthWithGoogle(account.idToken!!)
+            val intent = Intent(this, Map::class.java)
+            startActivity(intent)
+            finish()
         } catch (e: ApiException) {
             // Google Sign-In failed, update UI accordingly
         }
     }
 
     private fun firebaseAuthWithGoogle(idToken: String) {
-        val credential = GoogleAuthProvider.getCredential(idToken, null)
-        auth.signInWithCredential(credential)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    val user = auth.currentUser
-                    // You can now save user details or navigate to the main activity
-                    // For example:
-                    val intent = Intent(this, Map::class.java)
-                    startActivity(intent)
-                    finish()
-                } else {
-                    // If sign-in fails, display a message to the user.
-                    // You can handle the error here
-                }
-            }
+        loginViewModel.signInWithGoogle(idToken)
     }
 
     private fun tempOverride(){
