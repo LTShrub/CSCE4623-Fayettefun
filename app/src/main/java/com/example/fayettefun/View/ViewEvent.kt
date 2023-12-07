@@ -32,7 +32,7 @@ class ViewEvent : AppCompatActivity() {
     private lateinit var usernameTextView: TextView
     private lateinit var postedByTextView: TextView
     private lateinit var numberEditText: TextView
-
+    private lateinit var tagsTextView: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event)
@@ -49,6 +49,8 @@ class ViewEvent : AppCompatActivity() {
         postedByTextView = findViewById(R.id.textView12)
         numberEditText = findViewById(R.id.editTextNumber)
         descriptionTextView = findViewById(R.id.editTextDescription)
+        tagsTextView = findViewById(R.id.textView9)
+
 
         // Handles the intent objects
         val intent = intent
@@ -105,6 +107,9 @@ class ViewEvent : AppCompatActivity() {
 
                 val username = intent.getStringExtra("EVENT_CREATOR")
                 usernameTextView.text = username
+
+                val tags = intent.getStringArrayExtra("EVENT_TAGS")?.toList() ?: listOf()
+                displayTags(tags)
             }
         }
 
@@ -113,6 +118,11 @@ class ViewEvent : AppCompatActivity() {
             val eventId = "EVENT_ID"
             incrementRsvpCount(eventId) //Call increment function
         }
+    }
+
+    // Display tags in the TextView
+    private fun displayTags(tags: List<String>) {
+        tagsTextView.text = tags.joinToString(", ")
     }
 
     //Increment number of RSVPs

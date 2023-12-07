@@ -16,7 +16,7 @@ data class MapPoint(
     @get:PropertyName("description") var description: String = "",
     @get:PropertyName("address") var address: String = "",
     @get:PropertyName("rsvp-users") var rsvpUser: String = "",
-    @get:PropertyName("tag") var tag: String = "",
+    @get:PropertyName("tags") var tags: List<String> = listOf()
 ) : Parcelable { // Will make he MapPoint objects be parcelable so they can be send through intents
 
     constructor(parcel: Parcel) : this(
@@ -31,7 +31,7 @@ data class MapPoint(
         parcel.readString() ?: "",
         parcel.readString() ?: "",
         parcel.readString() ?: "",
-        parcel.readString() ?: ""
+        parcel.createStringArrayList() ?: listOf()
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -46,7 +46,7 @@ data class MapPoint(
         parcel.writeString(description)
         parcel.writeString(address)
         parcel.writeString(rsvpUser)
-        parcel.writeString(tag)
+        parcel.writeStringList(tags)
     }
 
     override fun describeContents(): Int {

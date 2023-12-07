@@ -97,13 +97,14 @@ class CreateEvent : AppCompatActivity() {
         val setTime = timeEvent.text.toString()
         val setDate = dateEvent.text.toString()
         val setDescription = descriptionEvent.text.toString()
+        val selectedTags = getSelectedTags()
         var setLatitude = 0.0
         var setLongitude = 0.0
 
         // Gets the address entered by the user and will get latitude and longitude from it
         if (setAddress.isNotEmpty()) {
             val coordinates = geocoder.getFromLocationName(setAddress, 1)
-            if (coordinates != null && coordinates.isNotEmpty()) {
+            if (!coordinates.isNullOrEmpty()) {
                 setLatitude = coordinates[0].latitude
                 setLongitude = coordinates[0].longitude
             }
@@ -112,7 +113,7 @@ class CreateEvent : AppCompatActivity() {
         return if (setName.isNotEmpty() && setAddress.isNotEmpty() && setTime.isNotEmpty() && setDate.isNotEmpty() && setDescription.isNotEmpty()) {
             // Create MapPoint object to add it as a record to Firebase
             val eventId = generateEventId()  // Generate a unique event ID
-            val newEvent = MapPoint(eventId, setCreatorId, setCreatorName, setLatitude, setLongitude, setName, setDate, setTime, setDescription,setAddress, "")
+            val newEvent = MapPoint(eventId, setCreatorId, setCreatorName, setLatitude, setLongitude, setName, setDate, setTime, setDescription,setAddress, "",selectedTags)
 
             if (newEvent != null) {
                 createEventViewModel.addMapPointToDatabase(newEvent)
@@ -155,6 +156,28 @@ class CreateEvent : AppCompatActivity() {
             Log.w("NewEventActivity", "No user signed in.")
             null
         }
+    }
+
+    private fun getSelectedTags(): List<String> {
+        val selectedTags = mutableListOf<String>()
+
+        // Add a reference to each CheckBox
+        checkBar = findViewById(R.id.checkBox_bars_clubs)
+        checkNature = findViewById(R.id.checkBox_nature_outdoors)
+        checkFood = findViewById(R.id.checkBox_food_drink)
+        checkHealth = findViewById(R.id.checkBox_fitness_health)
+        checkParty = findViewById(R.id.checkBox_parties)
+        checkGreek = findViewById(R.id.checkBox_greek_life)
+
+        // Add the text of each checked CheckBox to the list
+        if (checkBar.isChecked) selectedTags.add(checkBar.text.toString())
+        if (checkNature.isChecked) selectedTags.add(checkNature.text.toString())
+        if (checkFood.isChecked) selectedTags.add(checkFood.text.toString())
+        if (checkHealth.isChecked) selectedTags.add(checkHealth.text.toString())
+        if (checkParty.isChecked) selectedTags.add(checkParty.text.toString())
+        if (checkGreek.isChecked) selectedTags.add(checkGreek.text.toString())
+
+        return selectedTags
     }
 
 }

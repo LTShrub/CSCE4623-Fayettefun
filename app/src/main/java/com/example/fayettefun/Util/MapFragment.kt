@@ -112,29 +112,26 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
 
     override fun onMarkerClick(marker: Marker?, mapView: MapView?): Boolean {
         marker?.let {
-            val eventDescription =
-                eventMarkers[marker.id]?.description ?: "No description available"
-            val eventTitle = eventMarkers[marker.id]?.locationName ?: "No title available"
-            val eventLocation = eventMarkers[marker.id]?.address ?: "No address available"
-            val eventTime = eventMarkers[marker.id]?.eventTime ?: "No time available"
-            val eventDate = eventMarkers[marker.id]?.eventDate ?: "No date available"
-            val eventID = eventMarkers[marker.id]?.id ?: "No ID available"
-            val eventRSVP = eventMarkers[marker.id]?.rsvpUser ?: "No RSVPs"
-            val eventCreator = eventMarkers[marker.id]?.creatorName ?: "Creator Unknown"
-            val intent = Intent(activity, ViewEvent::class.java).apply {
-                putExtra("EVENT_ID", eventID)
-                putExtra("EVENT_DESCRIPTION", eventDescription)
-                putExtra("EVENT_TITLE", eventTitle)
-                putExtra("EVENT_LOCATION", eventLocation)
-                putExtra("EVENT_TIME", eventTime)
-                putExtra("EVENT_DATE", eventDate)
-                putExtra("EVENT_RSVP", eventRSVP)
-                putExtra("EVENT_CREATOR", eventCreator)
+            val event = eventMarkers[marker.id]
+            event?.let { evt ->
+                val tagsList = evt.tags.ifEmpty { listOf("No tags available") }
+                val intent = Intent(activity, ViewEvent::class.java).apply {
+                    putExtra("EVENT_ID", evt.id)
+                    putExtra("EVENT_DESCRIPTION", evt.description)
+                    putExtra("EVENT_TITLE", evt.locationName)
+                    putExtra("EVENT_LOCATION", evt.address)
+                    putExtra("EVENT_TIME", evt.eventTime)
+                    putExtra("EVENT_DATE", evt.eventDate)
+                    putExtra("EVENT_RSVP", evt.rsvpUser)
+                    putExtra("EVENT_CREATOR", evt.creatorName)
+                    putStringArrayListExtra("EVENT_TAGS", ArrayList(tagsList))
+                }
+                startActivity(intent)
             }
-            startActivity(intent)
         }
         return true
     }
+
 
 
     fun updateCurrentLocation(location: Location) {
