@@ -140,7 +140,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="Finds a random event for you and it shows you its infromation"
+                android:text="Allows you to create your own event. Don't be shy!"
                 android:textStyle="bold"
                 android:layout_gravity="center"
                 android:textSize="13sp"/>
