@@ -146,7 +146,7 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
         for (event in activeEvents) {
             val marker = Marker(mMap)
             marker.position = GeoPoint(event.latitude, event.longitude)
-            marker.icon = ResourcesCompat.getDrawable(resources, R.drawable.temp_even_icon, null)
+            marker.icon = ResourcesCompat.getDrawable(resources, R.drawable.fred_hole, null)
             marker.id = event.id
 
             // Set this fragment as the click listener for the marker
