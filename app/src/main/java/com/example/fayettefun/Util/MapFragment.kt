@@ -3,6 +3,7 @@ package com.example.fayettefun.Util
 import android.content.Intent
 import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +20,7 @@ import org.osmdroid.views.overlay.CopyrightOverlay
 import org.osmdroid.views.overlay.Marker
 import org.osmdroid.views.overlay.gestures.RotationGestureOverlay
 import com.example.fayettefun.View.ViewEvent // Adjust the package path if necessary
+import kotlin.random.Random
 
 
 class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
@@ -110,30 +112,6 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
             }
     }
 
-    override fun onMarkerClick(marker: Marker?, mapView: MapView?): Boolean {
-        marker?.let {
-            val event = eventMarkers[marker.id]
-            event?.let { evt ->
-                val tagsList = evt.tags.ifEmpty { listOf("No tags available") }
-                val intent = Intent(activity, ViewEvent::class.java).apply {
-                    putExtra("EVENT_ID", evt.id)
-                    putExtra("EVENT_DESCRIPTION", evt.description)
-                    putExtra("EVENT_TITLE", evt.locationName)
-                    putExtra("EVENT_LOCATION", evt.address)
-                    putExtra("EVENT_TIME", evt.eventTime)
-                    putExtra("EVENT_DATE", evt.eventDate)
-                    putExtra("EVENT_RSVP", evt.rsvpUser)
-                    putExtra("EVENT_CREATOR", evt.creatorName)
-                    putStringArrayListExtra("EVENT_TAGS", ArrayList(tagsList))
-                }
-                startActivity(intent)
-            }
-        }
-        return true
-    }
-
-
-
     fun updateCurrentLocation(location: Location) {
         mCurrentLocation = GeoPoint(
             location.latitude,
@@ -146,7 +124,7 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
         for (event in activeEvents) {
             val marker = Marker(mMap)
             marker.position = GeoPoint(event.latitude, event.longitude)
-            marker.icon = ResourcesCompat.getDrawable(resources, R.drawable.temp_even_icon, null)
+            marker.icon = ResourcesCompat.getDrawable(resources, R.drawable.fred_hole, null)
             marker.id = event.id
 
             // Set this fragment as the click listener for the marker
@@ -162,12 +140,41 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
         mMap.invalidate()
     }
 
-    fun randomEvent(randomMapPoint: MapPoint) {
-        val rLatitude = randomMapPoint.latitude // Random event latitude
-        val rLongitude = randomMapPoint.longitude // Random event longitude
-        val rLocation = GeoPoint(rLatitude, rLongitude) // Geolocation
-        mapController.setCenter(rLocation) // Sets the camera on the random event
+    private fun handleMarkerClick(mapPoint: MapPoint) {
+        val intent = Intent(activity, ViewEvent::class.java).apply {
+            putExtra("EVENT_ID", mapPoint.id)
+            putExtra("EVENT_DESCRIPTION", mapPoint.description)
+            putExtra("EVENT_TITLE", mapPoint.locationName)
+            putExtra("EVENT_LOCATION", mapPoint.address)
+            putExtra("EVENT_TIME", mapPoint.eventTime)
+            putExtra("EVENT_DATE", mapPoint.eventDate)
+            putExtra("EVENT_RSVP", mapPoint.rsvpUser)
+            putExtra("EVENT_CREATOR", mapPoint.creatorName)
+            val tagsExtra = if (mapPoint.tags.isNotEmpty()) ArrayList(mapPoint.tags) else arrayListOf("No Tags")
+            putStringArrayListExtra("EVENT_TAGS", tagsExtra)
+        }
+        startActivity(intent)
+    }
+    override fun onMarkerClick(marker: Marker?, mapView: MapView?): Boolean {
+        marker?.let {
+            val event = eventMarkers[marker.id]
+            event?.let { evt ->
+                handleMarkerClick(evt)
+            }
+        }
+        return true
+    }
+    fun getActiveEventMarkers(): List<MapPoint> {
+        return eventMarkers.values.toList()
+    }
 
+    fun randomEvent(activeEvents: List<MapPoint>) {
+        if (activeEvents.isNotEmpty()) {
+            val randomIndex = Random.nextInt(activeEvents.size)
+            val randomMapPoint = activeEvents[randomIndex]
+
+            handleMarkerClick(randomMapPoint)
+        }
     }
 }
 

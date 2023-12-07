@@ -75,17 +75,14 @@ class Map : AppCompatActivity() {
         centerCameraButton.setOnClickListener { // When pressed it will center the camera on the user
             mapsFragment.centerLocation()
         }
-        randomEventButton.setOnClickListener {  // It will take the user to a random local event
-            mapViewModel.getRandomEvent { randomMapPoint ->
-                if (randomMapPoint != null) {
-                    mapsFragment.randomEvent(randomMapPoint) // Passes the random event to the map fragment to be used
-                } else {
-                    Log.d("Map", "Error with random map point")
-                }
-                // Opens the random event
-                val intent = Intent(this, ViewEvent::class.java)
-                intent.putExtra("RANDOM_EVENT_KEY", randomMapPoint)
-                startActivity(intent)
+        randomEventButton.setOnClickListener {
+            // Fetch the active events directly from the mapsFragment
+            val activeEvents = mapsFragment.getActiveEventMarkers()
+            if (activeEvents.isNotEmpty()) {
+                mapsFragment.randomEvent(activeEvents)
+            } else {
+                Log.d("Map", "No active events available")
+                Toast.makeText(this, "No active events available", Toast.LENGTH_SHORT).show()
             }
         }
         userProfileButton.setOnClickListener {  // It will take the user to their profile

@@ -57,28 +57,6 @@ class ViewEvent : AppCompatActivity() {
         val data = intent.extras
 
         if (data != null) { // Handles intent from random button in map activity
-            if (data.containsKey("RANDOM_EVENT_KEY")) {
-                val event = data.getParcelable<MapPoint>("RANDOM_EVENT_KEY")
-                Log.d("Intent", "Received Event: $event")
-                val eventDescription = event?.description
-                descriptionTextView.text = eventDescription
-
-                val eventTitle = event?.locationName
-                titleTextView.text = eventTitle
-
-                val eventLocation = event?.locationName
-                addressEditText.text = eventLocation
-
-                val eventTime = event?.eventTime
-                timeEditText.text = eventTime
-
-                val eventDate = event?.eventDate
-                dateEditText.text = eventDate
-
-                val rsvpNum = event?.rsvpUser
-                numberEditText.text = rsvpNum
-            }
-            else{ // Handles intent from clicking an event in map fragment
                 val eventDescription = intent.getStringExtra("EVENT_DESCRIPTION")
                 descriptionTextView.text = eventDescription
 
@@ -102,12 +80,13 @@ class ViewEvent : AppCompatActivity() {
                 val rsvpNum = intent.getStringExtra("EVENT_RSVP")
                 numberEditText.text = rsvpNum
 
+                //get username
                 val username = intent.getStringExtra("EVENT_CREATOR")
                 usernameTextView.text = username
 
-                val tags = intent.getStringArrayExtra("EVENT_TAGS")?.toList() ?: listOf()
-                displayTags(tags)
-            }
+                //get tags
+                val tags = intent.getStringArrayListExtra("EVENT_TAGS")?.toList() ?: listOf()
+                tagsTextView.text = tags.joinToString("\n")
         }
 
         // Button
@@ -115,11 +94,6 @@ class ViewEvent : AppCompatActivity() {
             val eventId = "EVENT_ID"
             incrementRsvpCount(eventId) //Call increment function
         }
-    }
-
-    // Display tags in the TextView
-    private fun displayTags(tags: List<String>) {
-        tagsTextView.text = tags.joinToString(", ")
     }
 
     //Increment number of RSVPs

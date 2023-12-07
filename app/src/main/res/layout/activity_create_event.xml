@@ -118,13 +118,13 @@
             android:id="@+id/checkBox_bars_clubs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bars and Clubs"/>
+            android:text="#Bars and Clubs"/>
 
         <CheckBox
             android:id="@+id/checkBox_nature_outdoors"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nature and Outdoors"/>
+            android:text="#Nature and Outdoors"/>
     </LinearLayout>
 
     <LinearLayout
@@ -136,13 +136,13 @@
             android:id="@+id/checkBox_food_drink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Food and Drink"/>
+            android:text="#Food and Drink"/>
 
         <CheckBox
             android:id="@+id/checkBox_fitness_health"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Fitness and Health"/>
+            android:text="#Fitness and Health"/>
     </LinearLayout>
 
     <LinearLayout
@@ -154,13 +154,13 @@
             android:id="@+id/checkBox_parties"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Parties"/>
+            android:text="#Parties"/>
 
         <CheckBox
             android:id="@+id/checkBox_greek_life"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Greek Life"/>
+            android:text="#Greek Life"/>
     </LinearLayout>
 
     <Button
