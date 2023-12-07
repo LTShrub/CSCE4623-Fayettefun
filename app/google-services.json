@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "607797422921",
+    "project_id": "fayettefun-1b7c8",
+    "storage_bucket": "fayettefun-1b7c8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:607797422921:android:b0c416c7ca80f8dbf20898",
+        "android_client_info": {
+          "package_name": "com.example.fayettefun"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDX3gAEKsqw16BIyqGWw1HPxb9Ve9KVrLI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

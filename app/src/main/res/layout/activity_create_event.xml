@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@drawable/gradient_background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp"
+        tools:context=".View.CreateEvent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create Event"
+        android:textStyle="bold"
+        android:textSize="35sp"
+        android:textColor="#303F9F"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp"/>
+
+    <EditText
+        android:id="@+id/event_name"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Name"
+        android:backgroundTint="#073b4c"
+        android:background="@drawable/oval_button_normal"
+        android:textSize="25sp"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:layout_marginBottom="30dp"/>
+
+    <EditText
+        android:id="@+id/event_address"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Address"
+        android:backgroundTint="#073b4c"
+        android:background="@drawable/oval_button_normal"
+        android:textSize="25sp"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:layout_marginBottom="30dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/event_time"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:layout_marginBottom="30dp"
+            android:layout_marginRight="3dp"
+            style="@style/OvalButtons"
+            android:contentDescription="Select Time"
+            android:textAlignment="center"
+            android:textSize="25sp"
+            android:text="Time"
+            android:backgroundTint="#073b4c"
+            android:textColor="@color/white"/>
+
+        <Button
+            android:id="@+id/event_date"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="3dp"
+            style="@style/OvalButtons"
+            android:contentDescription="Select Date"
+            android:textAlignment="center"
+            android:textSize="25sp"
+            android:text="Date"
+            android:backgroundTint="#073b4c"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/event_description"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:hint="Enter description"
+        android:background="@drawable/oval_button_normal"
+        android:textSize="25sp"
+        android:backgroundTint="#073b4c"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:layout_marginBottom="60dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Tags"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        android:textColor="#303F9F"
+        android:layout_marginBottom="15dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="15dp">
+        <CheckBox
+            android:id="@+id/checkBox_bars_clubs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="#Bars and Clubs"/>
+
+        <CheckBox
+            android:id="@+id/checkBox_nature_outdoors"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="#Nature and Outdoors"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="15dp">
+        <CheckBox
+            android:id="@+id/checkBox_food_drink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="#Food and Drink"/>
+
+        <CheckBox
+            android:id="@+id/checkBox_fitness_health"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="#Fitness and Health"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="30dp">
+        <CheckBox
+            android:id="@+id/checkBox_parties"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="#Parties"/>
+
+        <CheckBox
+            android:id="@+id/checkBox_greek_life"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="#Greek Life"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/create_button"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="Create Event"
+        android:textColor="#000"
+        android:layout_gravity="bottom|end"/>
+    </LinearLayout>
+</ScrollView>

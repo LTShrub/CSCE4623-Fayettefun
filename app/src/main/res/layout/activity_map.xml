@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".View.Map">
+
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/map_fragment_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/center_camera_button"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="10dp"
+        android:padding="0dp"
+        style="@style/RoundButton"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:srcCompat="@drawable/user_location_icon"
+        android:contentDescription="Center Camera" />
+
+    <ImageButton
+        android:id="@+id/user_profile_button"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="10dp"
+        android:padding="0dp"
+        style="@style/RoundButton"
+        app:layout_constraintTop_toBottomOf="@id/center_camera_button"
+        app:layout_constraintRight_toRightOf="parent"
+        app:srcCompat="@drawable/user_profile_icon"
+        android:contentDescription="User Profile" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageButton
+            android:id="@+id/new_event_button"
+            style="@style/RoundButton"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginBottom="20dp"
+            android:contentDescription="New Event"
+            android:padding="0dp"
+            android:layout_gravity="center_vertical"
+            app:srcCompat="@drawable/add_event_icon" />
+
+        <ImageButton
+            android:id="@+id/random_event_button"
+            style="@style/RoundButton"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_marginBottom="20dp"
+            android:contentDescription="Random Event"
+            android:padding="0dp"
+            app:srcCompat="@drawable/random_event_icon" />
+
+        <ImageButton
+            android:id="@+id/help_button"
+            style="@style/RoundButton"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginBottom="20dp"
+            android:contentDescription="Something else"
+            android:padding="0dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/help_icon" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
