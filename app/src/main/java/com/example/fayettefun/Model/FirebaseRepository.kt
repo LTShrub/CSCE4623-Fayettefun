@@ -161,4 +161,25 @@ class FirebaseRepository {
             }
     }
 
+    fun getUserBio(userUid: String, onSuccess: (String) -> Unit, onFailure: () -> Unit) {
+        val userDocRef = database.collection("users").document(userUid)
+
+        userDocRef.get()
+            .addOnSuccessListener { documentSnapshot ->
+                if (documentSnapshot.exists()) {
+                    val userBio = documentSnapshot.getString("description")
+                    if (userBio != null) {
+                        onSuccess.invoke(userBio)
+                    } else {
+                        onFailure.invoke()
+                    }
+                } else {
+                    onFailure.invoke()
+                }
+            }
+            .addOnFailureListener { e ->
+                onFailure.invoke()
+            }
+    }
+
 }

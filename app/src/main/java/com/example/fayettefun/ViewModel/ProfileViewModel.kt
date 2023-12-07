@@ -12,6 +12,10 @@ class ProfileViewModel(private val firebaseRepository: FirebaseRepository) : Vie
     fun getUserName(userId: String, onSuccess: (String) -> Unit, onFailure: () -> Unit) {
         firebaseRepository.getUserName(userId, onSuccess, onFailure)
     }
+
+    fun getUserBio(userId: String, onSuccess: (String) -> Unit, onFailure: () -> Unit) {
+        firebaseRepository.getUserBio(userId, onSuccess, onFailure)
+    }
     // Function to update user data
     fun updateUserData(userId: String, newName: String, newBio: String) {
         firebaseRepository.updateUserData(userId, newName, newBio)

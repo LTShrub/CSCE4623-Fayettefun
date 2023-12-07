@@ -49,17 +49,8 @@ class Profile : AppCompatActivity() {
         editTextBio = findViewById(R.id.editTextBio)
         buttonSave = findViewById(R.id.buttonSave)
 
-        // Load user profile data
-        profileViewModel.userData.observe(this, Observer { user ->
-            // Update UI elements with user data
-            if (user != null) {
-                editTextName.setText(user.userName)
-            }
-            if (user != null) {
-                editTextBio.setText(user.description)
-            }
-            // Update other UI elements as needed
-        })
+        editTextName.setText(getUserName())
+        editTextBio.setText(getUserBio())
 
         // Set up the Save button click listener
         buttonSave.setOnClickListener {
@@ -69,9 +60,55 @@ class Profile : AppCompatActivity() {
                 editTextName.text.toString(),
                 editTextBio.text.toString()
             )
-            val intent = Intent(this, Map::class.java)
+            val intent = Intent(this, com.example.fayettefun.View.Map::class.java)
             startActivity(intent)
-            finish()
         }
     }
+
+    private fun getUserName(): String? {
+        val currentUserId = userId
+        return if (currentUserId != null) {
+            var creatorName: String? = null
+            profileViewModel.getUserName(
+                currentUserId,
+                onSuccess = { name ->
+                    creatorName = name
+                    // Update UI with user name when it's available
+                    editTextName.setText(name)
+                },
+                onFailure = {
+                    Log.w("ProfileActivity", "Failed to fetch user's name.")
+                }
+            )
+            // Return null or a default value if the name is not available immediately
+            creatorName ?: ""
+        } else {
+            Log.w("ProfileActivity", "No user signed in.")
+            null
+        }
+    }
+
+    private fun getUserBio(): String? {
+        val currentUserId = userId
+        return if (currentUserId != null) {
+            var creatorBio: String? = null
+            profileViewModel.getUserBio(
+                currentUserId,
+                onSuccess = { description ->
+                    creatorBio =  description
+                    // Update UI with user name when it's available
+                    editTextBio.setText(description)
+                },
+                onFailure = {
+                    Log.w("ProfileActivity", "Failed to fetch user's name.")
+                }
+            )
+            // Return null or a default value if the name is not available immediately
+            creatorBio ?: ""
+        } else {
+            Log.w("ProfileActivity", "No user signed in.")
+            null
+        }
+    }
+
 }
