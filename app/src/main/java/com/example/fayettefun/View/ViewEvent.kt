@@ -77,9 +77,6 @@ class ViewEvent : AppCompatActivity() {
 
                 val rsvpNum = event?.rsvpUser
                 numberEditText.text = rsvpNum
-
-                val username = event?.creatorName
-                usernameTextView.text = username
             }
             else{ // Handles intent from clicking an event in map fragment
                 val eventDescription = intent.getStringExtra("EVENT_DESCRIPTION")
