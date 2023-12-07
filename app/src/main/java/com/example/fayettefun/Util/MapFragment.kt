@@ -120,6 +120,7 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
             val eventDate = eventMarkers[marker.id]?.eventDate ?: "No date available"
             val eventID = eventMarkers[marker.id]?.id ?: "No ID available"
             val eventRSVP = eventMarkers[marker.id]?.rsvpUser ?: "No RSVPs"
+            val eventCreator = eventMarkers[marker.id]?.creatorName ?: "Creator Unknown"
             val intent = Intent(activity, ViewEvent::class.java).apply {
                 putExtra("EVENT_ID", eventID)
                 putExtra("EVENT_DESCRIPTION", eventDescription)
@@ -128,6 +129,7 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
                 putExtra("EVENT_TIME", eventTime)
                 putExtra("EVENT_DATE", eventDate)
                 putExtra("EVENT_RSVP", eventRSVP)
+                putExtra("EVENT_CREATOR", eventCreator)
             }
             startActivity(intent)
         }
