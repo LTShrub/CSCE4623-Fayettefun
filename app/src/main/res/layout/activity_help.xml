@@ -39,7 +39,7 @@
             android:layout_marginBottom="10dp"
             android:layout_gravity="end"
             android:padding="10dp"
-            android:text="Embark on a journey of social engagement with Fayattefun. Discover exciting events happening close to you, but also create your own events that resonate with their passions. Now let me show you what the main buttons of the app do!
+            android:text="Embark on a journey of social engagement with Fayattefun. Discover exciting events happening close to you, but also create your own events that resonate with your passions. Now let me show you what the main buttons of the app do!
 "
             android:textStyle="bold"
             android:textSize="17sp"
