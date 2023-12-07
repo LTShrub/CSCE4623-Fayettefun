@@ -112,27 +112,25 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
 
     override fun onMarkerClick(marker: Marker?, mapView: MapView?): Boolean {
         marker?.let {
-            val eventDescription =
-                eventMarkers[marker.id]?.description ?: "No description available"
-            val eventTitle = eventMarkers[marker.id]?.locationName ?: "No title available"
-            val eventLocation = eventMarkers[marker.id]?.address ?: "No address available"
-            val eventTime = eventMarkers[marker.id]?.eventTime ?: "No time available"
-            val eventDate = eventMarkers[marker.id]?.eventDate ?: "No date available"
-            val eventID = eventMarkers[marker.id]?.id ?: "No ID available"
-            val eventRSVP = eventMarkers[marker.id]?.rsvpUser ?: "No RSVPs"
-            val intent = Intent(activity, ViewEvent::class.java).apply {
-                putExtra("EVENT_ID", eventID)
-                putExtra("EVENT_DESCRIPTION", eventDescription)
-                putExtra("EVENT_TITLE", eventTitle)
-                putExtra("EVENT_LOCATION", eventLocation)
-                putExtra("EVENT_TIME", eventTime)
-                putExtra("EVENT_DATE", eventDate)
-                putExtra("EVENT_RSVP", eventRSVP)
+            val event = eventMarkers[marker.id]
+            event?.let { evt ->
+                val tagsList = evt.tags.ifEmpty { listOf("No tags available") }
+                val intent = Intent(activity, ViewEvent::class.java).apply {
+                    putExtra("EVENT_ID", evt.id)
+                    putExtra("EVENT_DESCRIPTION", evt.description)
+                    putExtra("EVENT_TITLE", evt.locationName)
+                    putExtra("EVENT_LOCATION", evt.address)
+                    putExtra("EVENT_TIME", evt.eventTime)
+                    putExtra("EVENT_DATE", evt.eventDate)
+                    putExtra("EVENT_RSVP", evt.rsvpUser)
+                    putStringArrayListExtra("EVENT_TAGS", ArrayList(tagsList))
+                }
+                startActivity(intent)
             }
-            startActivity(intent)
         }
         return true
     }
+
 
 
     fun updateCurrentLocation(location: Location) {
@@ -147,7 +145,7 @@ class OpenStreetMapFragment : Fragment(), Marker.OnMarkerClickListener {
         for (event in activeEvents) {
             val marker = Marker(mMap)
             marker.position = GeoPoint(event.latitude, event.longitude)
-            marker.icon = ResourcesCompat.getDrawable(resources, R.drawable.temp_even_icon, null)
+            marker.icon = ResourcesCompat.getDrawable(resources, R.drawable.fred_hole, null)
             marker.id = event.id
 
             // Set this fragment as the click listener for the marker
