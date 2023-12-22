@@ -16,3 +16,4 @@ Fayettefun is an application that uses location services to allow users to expre
 * Discover Random Events: Embrace spontaneity by discovering random events in your area with the “random” button.
 * Express Interest: Show appreciation for events that catch your eye by liking them.
 * Edit Your Profile: Enjoy flexibility by easily editing the details of your profile.
+* User location functionality with the Google Play services location library.
