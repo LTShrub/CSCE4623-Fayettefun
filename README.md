@@ -1,7 +1,18 @@
 # CSCE4623-Fayettefun
-
-Mobile application designed to allow users to network with one another and to find and start local events, get togethers, socials, etc. 
-Application will consist of a backend section where users will create an account(that will in theory) be validated for safety reasons and stored in a database. 
-App features will consist of a local area map(probably powered by a third-party mapping API such as Google Maps API) users will then be able to either select specific locations(such as businesses and known activities) 
-and start an event there, add a description. Other users will then be able to select these points on the map and express their interest in attending.  
-Along with that, there would also be a chat box allowing people to talk, share socials, etc.
+![Project Screenshot](presentation.jpg)
+## Overview
+Fayettefun is an application that uses location services to allow users to express their creativity and passion by creating events that fit them and describe them. An application that is meant to allow users to interact more with their community and meet interesting people in the process. 
+## System Information
+* Developed on Android Studio Giraffe
+* Minimum SDK: API 33 (“Tiramisu”; Android 13.0)
+* Language: Kotlin
+## Technology used
+* User authentication leverages Firebase Authentication.
+* Cloud-based database powered by Firebase Firestore.
+* Mapping functionality integrated with Osmdroid API (OpenStreetMap for Android).
+## Key features
+* Sign in/Register: Seamlessly log in or register using your Google account, email address, or phone number.
+* Create Events: Unleash your creativity by crafting and sharing events through the intuitive “+” button.
+* Discover Random Events: Embrace spontaneity by discovering random events in your area with the “random” button.
+* Express Interest: Show appreciation for events that catch your eye by liking them.
+* Edit Your Profile: Enjoy flexibility by easily editing the details of your profile.
